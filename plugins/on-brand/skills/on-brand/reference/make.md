@@ -2,17 +2,20 @@
 
 ## Before you start
 
-Read DESIGN.md, PRODUCT.md and the matching file in `formats/` (social, print, slides or email). If the person hasn't got a system yet, offer `start` first. If they only want something quick, make it and say it would look more like them with a system.
+Read DESIGN.md, PRODUCT.md and the matching file in `formats/` (social, email, slides, documents or web). If the person hasn't got a system yet, offer `start` first. If they only want something quick, make it and say it would look more like them with a system.
+
+**Something with no format file** (a business card, a Substack header, a podcast cover, a sticker): make it from DESIGN.md and PRODUCT.md, and look up the current size and safe zones for that platform or medium if you can search the web. If they'll make it again, offer to add a format file for it with `update`.
 
 Ask only what you need: what the piece is for, the words or facts it must include (date, price, link), and where it's going. Never invent facts like prices, dates or addresses. Leave a clearly marked gap and ask.
 
 ## Building it
 
-1. Start from the template in `templates/` that matches (`social-post.html` for social, `flyer.html` for print). For slides and email, build from the rules in the format file.
-2. Link the tokens: paste the contents of `tokens.css` into the page's `<style>`, and load the fonts named in DESIGN.md (Google Fonts link, or their own files from `assets/`).
-3. Write the copy to the copy rules in PRODUCT.md and the word limits in the format file. Headline first. If the copy doesn't fit the limits, cut words; don't shrink the type.
-4. Use only colors from the tokens. Respect the shares in DESIGN.md (an accent used everywhere stops being an accent).
-5. Check the piece against Do's and Don'ts before showing it.
+1. **Check the specs first** for social posts, banners, event covers and platform headers: follow "Keep the specs current" in the brand's `formats/social.md` (or the email file for platform headers). Stale or missing specs get looked up before you build, not after.
+2. Start from the template in `templates/` that matches (`social-post.html` for social, `flyer.html` for documents). For email, slides and web, build from the rules in the format file.
+3. Link the tokens: paste the contents of `tokens.css` into the page's `<style>`, and load the fonts named in DESIGN.md (Google Fonts link, or their own files from `assets/`).
+4. Write the copy to the copy rules in PRODUCT.md and the word limits in the format file. Headline first. If the copy doesn't fit the limits, cut words; don't shrink the type.
+5. Use only colors from the tokens. Respect the shares in DESIGN.md (an accent used everywhere stops being an accent).
+6. Check the piece against Do's and Don'ts before showing it.
 
 ## The test piece (end of `start`)
 
@@ -25,7 +28,7 @@ Show both side by side and name two or three specific differences ("the accent o
 
 ## Output
 
-- **Claude Code:** save the HTML. If Playwright or headless Chrome is available, render a PNG (social) or PDF (print) at the exact size in the format file, for example:
+- **Claude Code:** save the HTML. If Playwright or headless Chrome is available, render a PNG (social, email header) or PDF (documents) at the exact size in the format file, for example:
 
   ```bash
   npx playwright screenshot --viewport-size=1080,1350 file://$PWD/after.html after.png

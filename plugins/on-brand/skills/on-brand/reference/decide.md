@@ -22,7 +22,7 @@ Ask in this order. The wording is a guide; adjust it to the person and what you 
 5. **Refusals.** "What would never appear in your brand? Colors, styles, words, kinds of photos, anything." Push gently for specifics: "Anything you've seen a competitor do that you'd never do?" This is the most important question. Aim for at least five items.
 6. **Assets.** "Do you have a logo file, photos you own, illustrations or patterns we should use? Anything we should never use, like an old logo?"
 7. **Reasoning.** "When something you've made looks off, what's usually the reason?" (Too busy, wrong color, looks cheap, looks like everyone else.) The answer becomes a rule.
-8. **Where it shows up.** "What do you make most often: social posts, flyers, one-pagers, slides, email headers?" This decides which format files get written. Default to social posts and flyers if they're unsure.
+8. **Where it shows up.** "What do you make most often: social posts or banners, email newsletters, slides, PDFs like proposals or guides, flyers, web pages?" This decides which format files get written, and which platforms to note in the social file. Default to social posts and documents if they're unsure.
 9. **Words on the page.** "How much text should go on an image? For example, a headline of six words or fewer and no more than four or five short phrases. What goes on the graphic, and what goes in the caption? Sentence case or title case for headlines?"
 10. **Copy habits.** "Any words, punctuation or habits that should never show up? Exclamation points, emoji, ALL CAPS, certain buzzwords? How is your business name written? How do you write prices, dates and calls to action?"
 

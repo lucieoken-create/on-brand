@@ -1,12 +1,12 @@
 {
   "name": "on-brand",
-  "description": "Turn your brand into a design system Claude follows, then make on-brand posts, flyers and slides from it",
+  "description": "Turn your brand into a design system Claude follows, then make on-brand posts, emails, decks, PDFs and web pages from it",
   "owner": { "name": "Lucie Oken" },
   "plugins": [
     {
       "name": "on-brand",
       "source": "./plugins/on-brand",
-      "description": "Pulls a design system from your site, brand guide or screenshots, asks what only you can decide, writes DESIGN.md and PRODUCT.md, and makes marketing pieces from them"
+      "description": "Pulls a design system from your site, brand guide or screenshots, asks what only you can decide, writes DESIGN.md and PRODUCT.md, and makes marketing pieces from them, with platform specs it keeps current"
     }
   ]
 }

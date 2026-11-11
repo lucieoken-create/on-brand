@@ -1,6 +1,6 @@
 # on-brand
 
-A Claude skill that turns your brand into a design system Claude follows, then makes on-brand social posts, flyers and slides from it.
+A Claude skill that turns your brand into a design system Claude follows, then makes on-brand social posts, emails, decks, PDFs and web pages from it.
 
 I'm Lucie Oken. I run [hijinx](https://hijinx.studio), and everything I make with AI starts from one design system: my site, my decks, my social posts, even my business card. AI makes things fast, but without a system everything looks like everyone else's. This skill is the process I used, packaged so you can do it for your own brand.
 
@@ -8,7 +8,7 @@ I'm Lucie Oken. I run [hijinx](https://hijinx.studio), and everything I make wit
 
 1. **Pull.** It looks at what your brand already has: your website, a brand guide PDF, screenshots, or a design file from another tool. It tells you what it found and how sure it is about each value.
 2. **Decide.** It asks you up to ten questions, one at a time, about the things no tool can see: who it's for, what each color is for, what your brand would never do, and how much text belongs on an image.
-3. **Make.** It writes your system and makes a test post, once without the system and once with it, so you can see the difference. After that, ask for posts, flyers, one-pagers or slides and they follow your rules.
+3. **Make.** It writes your system and makes a test post, once without the system and once with it, so you can see the difference. After that, ask for social posts and banners, email headers, slides, PDFs and flyers, or a web page, and they follow your rules. Anything else visual works too; it just doesn't have its own rules file yet.
 
 ## What you get
 
@@ -17,7 +17,7 @@ A folder for your brand. The two files that matter most:
 - **DESIGN.md:** how your brand looks. Colors and their jobs, type, spacing, shapes, and your never-list. It uses the open [DESIGN.md format](https://github.com/google-labs-code/design.md) from Google Labs, so it also works in Claude Design, impeccable, Stitch and other tools.
 - **PRODUCT.md:** who it's for, why it looks the way it does, and your copy rules.
 
-Plus size and layout rules for the things you make most, and a small skill file so Claude loads your system on its own. The files are yours. They work even without this skill: attach them to any chat and most of the job is done.
+Plus size and layout rules for the things you make most, and a small skill file so Claude loads your system on its own. Social platforms change their sizes often, so your social rules carry the date they were last checked, and Claude looks up the current specs when they're out of date. The files are yours. They work even without this skill: attach them to any chat and most of the job is done.
 
 ## Three ways to use it
 

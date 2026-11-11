@@ -9,7 +9,7 @@ Before making anything visual for {{Brand}}, read these files in this order:
 
 1. `DESIGN.md` for how it looks: colors and their jobs, type, layout, shapes, and the Do's and Don'ts.
 2. `PRODUCT.md` for who it's for, why it looks this way, and the copy rules.
-3. The file in `formats/` that matches what you're making.
+3. The file in `formats/` that matches what you're making. For social posts, banners and event covers, check the "Specs last checked" date in `formats/social.md` first and refresh the specs if they're stale. For anything without a format file, work from DESIGN.md and PRODUCT.md and look up the current size for that platform.
 
 Use `tokens.css` for exact values in HTML. Use only the fonts and colors defined there. Logo and image files are in `assets/`.
 

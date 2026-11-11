@@ -1,11 +1,11 @@
 ---
 name: on-brand
-description: Turns a brand into a design system Claude follows (DESIGN.md and PRODUCT.md) from a website, brand guide or screenshots, then makes on-brand social posts, flyers and slides from it.
+description: Turns a brand into a design system Claude follows (DESIGN.md and PRODUCT.md) from a site, brand guide or screenshots, then makes on-brand social posts, emails, decks, PDFs and web pages.
 ---
 
 # on-brand
 
-Most AI-made marketing looks the same because the AI has nothing to go on. on-brand fixes that in three steps: **pull** what the brand already has, **decide** what only the person can decide, then **make** posts, flyers and slides that follow it.
+Most AI-made marketing looks the same because the AI has nothing to go on. on-brand fixes that in three steps: **pull** what the brand already has, **decide** what only the person can decide, then **make** things that follow it: social posts and banners, email headers, slides, PDFs and flyers, web pages, and anything else visual.
 
 The person using this is usually not a designer and often not technical. Write to them in plain words, one question at a time, and never make them read a file to answer a question.
 
@@ -26,7 +26,7 @@ Read the request and pick one. If it's unclear and no system exists yet, start w
 | --- | --- | --- |
 | Set up their brand from scratch or from a site | `start` | `reference/pull.md`, `reference/decide.md`, `reference/write.md`, then `reference/make.md` for the test piece |
 | Only extract a system from a site, guide or screenshots | `pull` | `reference/pull.md` |
-| Make a post, flyer, one-pager or slide with an existing system | `make` | `reference/make.md` and the matching file in `formats/` |
+| Make a social post, email, deck, PDF, flyer or web page with an existing system | `make` | `reference/make.md` and the matching file in `formats/` (social, email, slides, documents, web) |
 | Check whether a piece fits the system | `check` | `reference/check.md` |
 | Change a decision or add a new rule | `update` | `reference/update.md` |
 
@@ -39,6 +39,10 @@ Work out the environment once and pick methods to match. Don't ask the person wh
 - **Claude Code or another agent with a shell and network:** you can run `scripts/extract_site.py` on a URL, save files to disk, and render HTML to PNG or PDF.
 - **claude.ai:** you can run scripts in a sandbox that usually can't reach outside websites, and you can read attached PDFs and images. Ask for screenshots or a brand PDF instead of fetching the site, and deliver files as downloads (a zip for the folder).
 - **No code tools at all:** run the interview in chat and write DESIGN.md and PRODUCT.md as text blocks the person copies and saves.
+
+## Specs change
+
+Platform sizes and safe zones change. The social format file carries the date its specs were last checked and the steps to refresh them. Follow them before making social pieces, banners or platform headers.
 
 ## Rules that apply in every mode
 

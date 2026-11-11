@@ -1,7 +1,7 @@
 {
   "name": "on-brand",
   "version": "0.1.0",
-  "description": "Turn your brand into a design system Claude follows, then make on-brand posts, flyers and slides from it",
+  "description": "Turn your brand into a design system Claude follows, then make on-brand posts, emails, decks, PDFs and web pages from it",
   "author": { "name": "Lucie Oken", "url": "https://hijinx.studio" },
   "license": "MIT"
 }
