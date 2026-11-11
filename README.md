@@ -1,0 +1,82 @@
+# on-brand
+
+A Claude skill that turns your brand into a design system Claude follows, then makes on-brand social posts, flyers and slides from it.
+
+I'm Lucie Oken. I run [hijinx](https://hijinx.studio), and everything I make with AI starts from one design system: my site, my decks, my social posts, even my business card. AI makes things fast, but without a system everything looks like everyone else's. This skill is the process I used, packaged so you can do it for your own brand.
+
+## What it does
+
+1. **Pull.** It looks at what your brand already has: your website, a brand guide PDF, screenshots, or a design file from another tool. It tells you what it found and how sure it is about each value.
+2. **Decide.** It asks you up to ten questions, one at a time, about the things no tool can see: who it's for, what each color is for, what your brand would never do, and how much text belongs on an image.
+3. **Make.** It writes your system and makes a test post, once without the system and once with it, so you can see the difference. After that, ask for posts, flyers, one-pagers or slides and they follow your rules.
+
+## What you get
+
+A folder for your brand. The two files that matter most:
+
+- **DESIGN.md:** how your brand looks. Colors and their jobs, type, spacing, shapes, and your never-list. It uses the open [DESIGN.md format](https://github.com/google-labs-code/design.md) from Google Labs, so it also works in Claude Design, impeccable, Stitch and other tools.
+- **PRODUCT.md:** who it's for, why it looks the way it does, and your copy rules.
+
+Plus size and layout rules for the things you make most, and a small skill file so Claude loads your system on its own. The files are yours. They work even without this skill: attach them to any chat and most of the job is done.
+
+## Three ways to use it
+
+**1. Claude Code.** Start Claude Code in Terminal (`claude`), then run:
+
+```
+/plugin install on-brand --marketplace lucieoken-create/on-brand
+```
+
+This is the most precise route: it reads your site's code for exact colors and fonts.
+
+**2. Upload it to claude.ai.** Download `on-brand.zip` from the [latest release](https://github.com/lucieoken-create/on-brand/releases/latest). In claude.ai, go to Customize, then Skills, click +, then Create skill, then Upload a skill, and choose the zip. Skills work on every plan, as long as "Code execution and file creation" is on in Settings, then Capabilities. A skill you upload to claude.ai also loads in Claude Code when you sign in with the same account.
+
+**3. No install.** Copy the prompts in [start-prompt.md](start-prompt.md) into a new chat. You get the same interview and the same two files, without installing anything. Use this if your company account doesn't allow custom skills.
+
+## Use it
+
+Once it's installed, say:
+
+```
+Use on-brand to set up my brand. My website is example.com.
+```
+
+In claude.ai, attach screenshots of your site or a brand guide PDF instead of a link. Claude can read the words on a page from a link, but not its colors and fonts.
+
+After setup:
+
+```
+Use my brand system to make an Instagram post for our holiday open house, Saturday Dec 6, 2 to 6pm.
+```
+
+```
+Check this flyer against my brand system.
+```
+
+## Good to know
+
+- **Some values are estimates.** Colors read from screenshots shift, and fonts can only be matched by eye. The skill marks these. Swap in exact values from your brand files when you can.
+- **Use it on your own brand,** or a client's with permission. Point it at someone else's site and it treats it as inspiration and writes an original system. It won't copy another brand's logo or exact look.
+- **Fonts:** it uses Google Fonts or font files you own, and tells you which. If your site uses a paid font, it suggests a free stand-in and labels it.
+- **It covers copy rules, not your whole voice.** Word limits, case, punctuation and banned words, yes. For how you sound in longer writing, pair it with a voice or writing-style skill.
+
+## Updates
+
+This repo is the source of truth. When I update the skill, the version number and changes are listed below. Claude Code users get updates through the plugin; claude.ai users download the new zip and upload it again. Your own DESIGN.md and PRODUCT.md never change when the skill does.
+
+**0.1.0** (November 2026): first release.
+
+## Credits
+
+on-brand stands on other people's work:
+
+- The [DESIGN.md format](https://github.com/google-labs-code/design.md) from Google Labs (Apache 2.0).
+- [impeccable](https://github.com/pbakaus/impeccable) by Paul Bakaus, for the idea of keeping strategy (PRODUCT.md) separate from visuals (DESIGN.md). If you build websites, use it.
+- [jezweb's design-system skill](https://github.com/jezweb/claude-skills), for the order to look for colors and fonts in a site's code, and for checking the result with a test piece.
+- Anthropic's skill-creator, which I used to build and test this.
+
+No text from these projects is copied here.
+
+## License
+
+MIT. Use it, change it, share it.

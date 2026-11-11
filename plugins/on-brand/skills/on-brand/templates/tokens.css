@@ -1,0 +1,31 @@
+/* {{Brand}} design tokens. Same names and values as DESIGN.md. Built with on-brand. */
+
+/* Fonts: replace with the Google Fonts link for the two families, or @font-face rules for owned files. */
+/* @import url("https://fonts.googleapis.com/css2?family={{Headline+Font}}:wght@{{weights}}&family={{Body+Font}}:wght@{{weights}}&display=swap"); */
+
+:root {
+  /* Colors, named by job */
+  --color-primary: {{#hex}};
+  --color-secondary: {{#hex}};
+  --color-tertiary: {{#hex}};
+  --color-neutral: {{#hex}};
+
+  /* Type */
+  --font-display: "{{Headline font}}", {{fallback, e.g. Georgia, serif}};
+  --font-body: "{{Body font}}", {{fallback, e.g. system-ui, sans-serif}};
+  --weight-display: {{600}};
+  --weight-body: {{400}};
+  --tracking-display: {{-0.02em}};
+  --tracking-label: {{0.08em}};
+  --leading-display: {{1.1}};
+  --leading-body: {{1.6}};
+
+  /* Shape and space */
+  --radius-sm: {{0px}};
+  --radius-md: {{0px}};
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 64px;
+}

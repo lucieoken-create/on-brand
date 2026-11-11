@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{{Brand}} post: {{what it's for}}</title>
+<!-- Starter layout for a 1080 × 1350 feed post. Paste the brand's tokens.css into the style block,
+     load its fonts, then adapt the layout to DESIGN.md. Slots are in double curly braces. -->
+<style>
+  /* tokens.css goes here */
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #ddd; }
+  .post {
+    width: 1080px; height: 1350px; overflow: hidden; position: relative;
+    background: var(--color-neutral); color: var(--color-primary);
+    font-family: var(--font-body); line-height: var(--leading-body);
+    padding: 96px 80px; display: flex; flex-direction: column;
+  }
+  .eyebrow {
+    font-size: 28px; letter-spacing: var(--tracking-label); text-transform: uppercase;
+    color: var(--color-secondary);
+  }
+  .headline {
+    font-family: var(--font-display); font-weight: var(--weight-display);
+    letter-spacing: var(--tracking-display); line-height: var(--leading-display);
+    font-size: 112px; margin-top: var(--space-lg); max-width: 15ch;
+    text-wrap: balance;
+  }
+  .detail { font-size: 40px; margin-top: var(--space-lg); }
+  .accent { color: var(--color-tertiary); }
+  .image {
+    margin-top: auto; height: 420px; border-radius: var(--radius-md);
+    background: var(--color-secondary) center / cover no-repeat;
+  }
+  .footer {
+    margin-top: var(--space-lg); font-size: 28px; display: flex; justify-content: space-between;
+    color: var(--color-secondary);
+  }
+</style>
+</head>
+<body>
+  <div class="post">
+    <p class="eyebrow">{{short label, e.g. Small Business Saturday}}</p>
+    <h1 class="headline">{{headline within the word limit}}</h1>
+    <p class="detail"><span class="accent">{{the one accented fact, e.g. Sat, Nov 29}}</span> {{supporting words}}</p>
+    <!-- Optional photo. Delete this block if the brand doesn't use one here. -->
+    <div class="image" style="background-image: url('{{assets/photo.jpg}}')" role="img" aria-label="{{alt text}}"></div>
+    <div class="footer"><span>{{Business name as written in PRODUCT.md}}</span><span>{{@handle or location}}</span></div>
+  </div>
+</body>
+</html>

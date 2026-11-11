@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{{Brand}} flyer: {{what it's for}}</title>
+<!-- Starter layout for a US letter flyer (switch @page to A4 outside the US). Paste the brand's tokens.css
+     into the style block, load its fonts, adapt to DESIGN.md, then print to PDF. Slots are in double curly braces. -->
+<style>
+  /* tokens.css goes here */
+
+  @page { size: 8.5in 11in; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #ddd; }
+  .page {
+    width: 8.5in; height: 11in; overflow: hidden; position: relative; margin: 0 auto;
+    background: var(--color-neutral); color: var(--color-primary);
+    font-family: var(--font-body); line-height: var(--leading-body);
+    padding: 0.75in; display: flex; flex-direction: column;
+  }
+  .eyebrow {
+    font-size: 12pt; letter-spacing: var(--tracking-label); text-transform: uppercase;
+    color: var(--color-secondary);
+  }
+  .headline {
+    font-family: var(--font-display); font-weight: var(--weight-display);
+    letter-spacing: var(--tracking-display); line-height: var(--leading-display);
+    font-size: 72pt; margin-top: 0.3in; max-width: 12ch; text-wrap: balance;
+  }
+  .when {
+    margin-top: 0.4in; font-size: 22pt; color: var(--color-tertiary);
+    font-family: var(--font-display); font-weight: var(--weight-display);
+  }
+  .body { margin-top: 0.3in; font-size: 12pt; max-width: 5in; }
+  .footer {
+    margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end;
+    font-size: 11pt; border-top: 1px solid var(--color-secondary); padding-top: 0.2in;
+  }
+  .qr { width: 0.9in; height: 0.9in; }
+  @media print { html, body { background: none; } }
+</style>
+</head>
+<body>
+  <div class="page">
+    <p class="eyebrow">{{short label}}</p>
+    <h1 class="headline">{{headline within the word limit}}</h1>
+    <p class="when">{{date, time}}</p>
+    <p class="body">{{one or two short sentences: what it is and why come}}</p>
+    <div class="footer">
+      <div>
+        <strong>{{Business name as written in PRODUCT.md}}</strong><br>
+        {{address or website}}
+      </div>
+      <!-- Optional QR code. Delete if not needed. Say in a few words where it goes. -->
+      <div><img class="qr" src="{{assets/qr.png}}" alt="{{where the code goes}}"><br>{{where the code goes}}</div>
+    </div>
+  </div>
+</body>
+</html>
