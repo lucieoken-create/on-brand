@@ -25,3 +25,5 @@ A short list, most important first, each with what's wrong, where, and the fix:
 Keep it to five items or fewer. If more is wrong, say the piece needs a rebuild and offer to remake it with `make`.
 
 End by asking them to make the last call: "Does it feel like you?" A checklist can pass work that still feels off, and they'll know.
+
+Also run the piece against `reference/principles.md`, and report those findings the same way, each with the rule it falls under and what to change. Where the person's system and a principle disagree, the system wins and the principle is not a finding.

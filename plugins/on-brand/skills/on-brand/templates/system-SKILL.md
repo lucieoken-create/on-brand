@@ -17,6 +17,8 @@ Edit mode: ask
 
 (`ask`, `always` or `never`. This decides whether a finished piece also comes back as an editable page where the words and brand colors can be changed and the result downloaded. With `ask`, offer once after showing a piece.)
 
+Before showing any piece, check it against the rules in DESIGN.md's Do's and Don'ts, and check alignment: shared edges, even gaps, nothing nearly lined up.
+
 Never invent facts (prices, dates, addresses) for a piece. Ask.
 
 If a new decision comes up while working ("never put text over the photo"), suggest adding it to the right file so it sticks.

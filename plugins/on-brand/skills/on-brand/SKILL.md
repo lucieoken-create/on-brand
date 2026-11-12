@@ -56,6 +56,7 @@ Platform sizes and safe zones change. The social format file carries the date it
 - **Check contrast** on every text and background pair with `scripts/contrast.py` when you can run code (4.5:1 for body text, 3:1 for large headlines). Flag failures and suggest the nearest passing shade from their palette. Without code, estimate and say it's an estimate.
 - **Only use fonts they're allowed to use:** Google Fonts, or files they own. Say which is which. If their site uses a paid font they haven't licensed for other uses, suggest the closest Google Font and label it as a stand-in.
 - **Whose brand is it?** Their own or a client's with permission is fine. For anyone else's site, treat it as reference: describe the feel and write an original system. Never copy another brand's logo, artwork, or exact palette and type pairing.
+- **Check every piece against `reference/principles.md`** before showing it: one thing leads, the accent stays rare, alignment is deliberate, decoration has a job. The person's own system wins where they conflict.
 - **Don't let AI defaults creep in.** No emoji in headings, no gradient blobs, no rounded cards everywhere just because, no stock phrases ("unlock", "elevate", "seamless"), no new colors outside the system.
 - **Keep it short.** DESIGN.md under about 250 lines, PRODUCT.md under about 120. A non-designer should be able to read both in ten minutes.
 

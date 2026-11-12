@@ -79,6 +79,10 @@ Your design system works for your site too, in three ways:
 
 It doesn't build or manage a whole site. For that, use your system with a tool made for it; [impeccable](https://github.com/pbakaus/impeccable) is a good one if you work in code.
 
+## What keeps it from looking like AI
+
+The skill carries twelve rules I check on everything I make, and it runs each piece against them before showing it to you: one thing leads, the accent color stays rare, the headline says something specific, decoration needs a job, and alignment is deliberate. That last one is the note I give most often on a first pass from any AI tool. The full list is in [`reference/principles.md`](plugins/on-brand/skills/on-brand/reference/principles.md). Your own system wins wherever it disagrees with mine.
+
 ## Where I look
 
 Two of the interview questions are hard to answer cold: what your brand should feel like, and what it would never do. It helps to look at a lot of good work first and notice what you're drawn to. I keep a public list of the places I go for that, with the design skills and references I use most: [Where I look: inspo and resources for AI-assisted design](https://hijinx-studio.notion.site/design-resources).

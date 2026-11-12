@@ -2,7 +2,7 @@
 
 ## Before you start
 
-Read DESIGN.md, PRODUCT.md and the matching file in `formats/` (social, email, slides, documents or web). If the person hasn't got a system yet, offer `start` first. If they only want something quick, make it and say it would look more like them with a system.
+Read DESIGN.md, PRODUCT.md, `reference/principles.md` and the matching file in `formats/` (social, email, slides, documents or web). If the person hasn't got a system yet, offer `start` first. If they only want something quick, make it and say it would look more like them with a system.
 
 **Something with no format file** (a business card, a Substack header, a podcast cover, a sticker): make it from DESIGN.md and PRODUCT.md, and look up the current size and safe zones for that platform or medium if you can search the web. If they'll make it again, offer to add a format file for it with `update`.
 
@@ -15,7 +15,7 @@ Ask only what you need: what the piece is for, the words or facts it must includ
 3. Link the tokens: paste the contents of `tokens.css` into the page's `<style>`, and load the fonts named in DESIGN.md (Google Fonts link, or their own files from `assets/`).
 4. Write the copy to the copy rules in PRODUCT.md and the word limits in the format file. Headline first. If the copy doesn't fit the limits, cut words; don't shrink the type.
 5. Use only colors from the tokens. Respect the shares in DESIGN.md (an accent used everywhere stops being an accent).
-6. Check the piece against Do's and Don'ts before showing it.
+6. Check the piece against Do's and Don'ts and against `reference/principles.md` before showing it. Alignment is the one to look at hardest: render the piece if you can and trace the edges.
 
 ## The test piece (end of `start`)
 

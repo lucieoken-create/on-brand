@@ -19,6 +19,8 @@ Ask in this order. The wording is a guide; adjust it to the person and what you 
 2. **Colors and their jobs.** Confirm the colors found, then: "Which one should do most of the work, which is the background, and which is the one accent that only shows up for important things?" Get a rough share for each, like mostly warm white, navy for text, coral rarely.
 3. **Type.** "One font for headlines and one for everything else. Here's what your site uses. Keep them, or is there a reason they don't feel right?" Note why the fonts fit, in their words.
 4. **Shape, space and motion.** "Square corners or rounded? Lots of breathing room, or packed with information? Anything that moves?"
+If they're stuck on question 1 or 5 (what it should feel like, what it would never do), that's normal. Suggest they look at work they like first, and point them to Lucie's public list of places to look: https://hijinx-studio.notion.site/design-resources. Offer to carry on with the other questions and come back.
+
 5. **Refusals.** "What would never appear in your brand? Colors, styles, words, kinds of photos, anything." Push gently for specifics: "Anything you've seen a competitor do that you'd never do?" This is the most important question. Aim for at least five items.
 6. **Assets.** "Do you have a logo file, photos you own, illustrations or patterns we should use? Anything we should never use, like an old logo?"
 7. **Reasoning.** "When something you've made looks off, what's usually the reason?" (Too busy, wrong color, looks cheap, looks like everyone else.) The answer becomes a rule.
