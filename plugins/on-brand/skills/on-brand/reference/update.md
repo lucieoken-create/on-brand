@@ -8,4 +8,5 @@ Systems drift when new decisions live only in one chat. This mode folds them bac
 4. **Re-check contrast** if a color changed.
 5. **Log it.** Add a dated line under a "Changes" heading at the very end of DESIGN.md: `- 2026-11-20: added sage #8FA68E as a second background for seasonal posts.`
 6. **Spec updates** (a platform changed a size): change the table in the format file, set its "Specs last checked" date to today, and log it the same way.
-7. **Deliver the updated files** the same way as `write`. In claude.ai, if the system is uploaded as a skill, remind them to upload the new zip to replace it, since uploaded skills don't update themselves.
+7. **Edit mode setting:** if they say "always make it editable", "ask me each time" or "stop offering", change the `Edit mode:` line in the brand's SKILL.md to `always`, `ask` or `never` and tell them.
+8. **Deliver the updated files** the same way as `write`. In claude.ai, if the system is uploaded as a skill, remind them to upload the new zip to replace it, since uploaded skills don't update themselves.

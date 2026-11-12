@@ -27,6 +27,7 @@ Read the request and pick one. If it's unclear and no system exists yet, start w
 | Set up their brand from scratch or from a site | `start` | `reference/pull.md`, `reference/decide.md`, `reference/write.md`, then `reference/make.md` for the test piece |
 | Only extract a system from a site, guide or screenshots | `pull` | `reference/pull.md` |
 | Make a social post, email, deck, PDF, flyer or web page with an existing system | `make` | `reference/make.md` and the matching file in `formats/` (social, email, slides, documents, web) |
+| Tweak a piece themselves (change the words, switch colors, download) | `make`, editable | `reference/editing.md` and `templates/edit-post.html` |
 | Check whether a piece fits the system | `check` | `reference/check.md` |
 | Change a decision or add a new rule | `update` | `reference/update.md` |
 
@@ -39,6 +40,10 @@ Work out the environment once and pick methods to match. Don't ask the person wh
 - **Claude Code or another agent with a shell and network:** you can run `scripts/extract_site.py` on a URL, save files to disk, and render HTML to PNG or PDF.
 - **claude.ai:** you can run scripts in a sandbox that usually can't reach outside websites, and you can read attached PDFs and images. Ask for screenshots or a brand PDF instead of fetching the site, and deliver files as downloads (a zip for the folder).
 - **No code tools at all:** run the interview in chat and write DESIGN.md and PRODUCT.md as text blocks the person copies and saves.
+
+## Editable pieces
+
+A piece can come back as an editable page: the person changes the words, switches between their own brand's color pairings and sizes, and downloads it. Whether to build one is set by the `Edit mode:` line in the brand's SKILL.md (`ask`, `always` or `never`; `ask` if the line is missing). `reference/editing.md` has the rules, and they also apply to anything bigger, like a brand studio.
 
 ## Specs change
 

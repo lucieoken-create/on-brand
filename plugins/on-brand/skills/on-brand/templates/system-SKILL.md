@@ -13,6 +13,10 @@ Before making anything visual for {{Brand}}, read these files in this order:
 
 Use `tokens.css` for exact values in HTML. Use only the fonts and colors defined there. Logo and image files are in `assets/`.
 
+Edit mode: ask
+
+(`ask`, `always` or `never`. This decides whether a finished piece also comes back as an editable page where the words and brand colors can be changed and the result downloaded. With `ask`, offer once after showing a piece.)
+
 Never invent facts (prices, dates, addresses) for a piece. Ask.
 
 If a new decision comes up while working ("never put text over the photo"), suggest adding it to the right file so it sticks.

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{Brand}}: edit this post</title>
+<!-- Edit mode starter. One page, no outside files. Fill BRAND and START in the script,
+     adapt render() to the layout in DESIGN.md, and follow reference/editing.md. -->
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #f4f4f2; color: #222; font: 15px/1.5 system-ui, sans-serif; }
+  main { display: grid; grid-template-columns: minmax(0, 1fr) 360px; min-height: 100vh; }
+  .stage { padding: 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .stage canvas { max-width: 100%; max-height: calc(100vh - 110px); width: auto; height: auto; background: #fff; box-shadow: 0 2px 16px rgba(0,0,0,.14); }
+  .panel { background: #fff; border-left: 1px solid #ddd; padding: 24px; overflow: auto; }
+  h1 { font-size: 18px; margin: 0 0 4px; }
+  h2 { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: #666; margin: 28px 0 10px; font-weight: 600; }
+  p.note { color: #666; font-size: 13px; margin: 4px 0 0; }
+  p.warn { color: #8a4b00; background: #fff3d6; padding: 6px 8px; font-size: 13px; margin: 6px 0 0; }
+  label { display: block; margin: 0 0 12px; }
+  label span { display: block; font-size: 13px; color: #555; margin-bottom: 3px; }
+  input[type=text], textarea { width: 100%; font: inherit; padding: 8px 10px; border: 1px solid #bbb; border-radius: 4px; }
+  textarea { resize: vertical; min-height: 60px; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; align-items: center; }
+  button { font: inherit; padding: 8px 12px; border: 1px solid #bbb; background: #fff; border-radius: 4px; cursor: pointer; }
+  button[aria-pressed=true] { border-color: #222; box-shadow: inset 0 0 0 1px #222; }
+  button.main { background: #222; color: #fff; border-color: #222; padding: 10px 16px; }
+  button.pair { display: inline-flex; align-items: center; gap: 8px; }
+  button.pair i { width: 22px; height: 22px; border: 1px solid rgba(0,0,0,.25); display: inline-flex; align-items: center; justify-content: center; font-style: normal; font-size: 12px; font-weight: 700; }
+  output { min-width: 5ch; text-align: center; }
+  :focus-visible { outline: 2px solid #222; outline-offset: 2px; }
+  #status { font-size: 13px; color: #555; min-height: 1.5em; }
+  @media (max-width: 860px) { main { display: block; } .panel { border-left: 0; border-top: 1px solid #ddd; } .stage canvas { max-height: none; } }
+</style>
+</head>
+<body>
+<main>
+  <section class="stage">
+    <canvas id="cv" aria-label="Preview of the post"></canvas>
+    <div id="status" role="status">Ready</div>
+  </section>
+  <aside class="panel">
+    <h1>Edit this post</h1>
+    <p class="note">Every option here is already in your brand system. Change the words, pick a look, then download.</p>
+    <h2>Words</h2>
+    <div id="words"></div>
+    <h2>Look</h2>
+    <div class="row" id="pairs" role="group" aria-label="Colors"></div>
+    <div class="row"><span>Headline size</span><button id="smaller" aria-label="Smaller headline">−</button><output id="size"></output><button id="bigger" aria-label="Bigger headline">+</button></div>
+    <div class="row" id="aligns" role="group" aria-label="Alignment"></div>
+    <div class="row"><label style="margin:0"><span>Photo (optional, stays on your computer)</span><input type="file" id="photo" accept="image/*"></label><button id="nophoto" hidden>Remove photo</button></div>
+    <h2>Shape</h2>
+    <div class="row" id="shapes" role="group" aria-label="Shape"></div>
+    <label id="guides-row" hidden style="display:none"><input type="checkbox" id="guides"> Show what the app covers (preview only)</label>
+    <h2>Finish</h2>
+    <div class="row"><button class="main" id="download">Download PNG</button><button id="reset">Start over</button></div>
+    <p class="note" id="fontnote"></p>
+  </aside>
+</main>
+<script>
+(function () {
+'use strict';
+/* ---------- the brand: fill from DESIGN.md and PRODUCT.md ---------- */
+var BRAND = {
+  name: '{{Brand}}',
+  // Only pairings that pass contrast (scripts/contrast.py). name, background, text, accent.
+  pairs: [
+    { id: 'light', name: '{{Navy on cream}}', bg: '{{#FAF7F2}}', text: '{{#1D2B3A}}', accent: '{{#C8553D}}', soft: '{{#5B6875}}' },
+    { id: 'dark',  name: '{{Cream on navy}}', bg: '{{#1D2B3A}}', text: '{{#FAF7F2}}', accent: '{{#E9A28F}}', soft: '{{#B9C2CB}}' }
+  ],
+  display: '{{600}} {{"Headline font", Georgia, serif}}',   // weight, then the font stack from tokens.css
+  body: '{{400}} {{"Body font", system-ui, sans-serif}}',
+  headlineWords: 6,            // word limit from PRODUCT.md; 0 for none
+  eyebrowCaps: true,           // from the copy rules
+  radius: 0,                   // corner radius for the photo, from DESIGN.md
+  fontNote: '{{Shown in a stand-in font here. The download uses the same one. For your exact fonts, ask Claude to embed the font files.}}'
+};
+/* ---------- this piece: the spec Claude starts the person with ---------- */
+var START = {
+  shape: 'feed', pair: 'light', size: 1, align: 'left',
+  eyebrow: '{{Small Business Saturday}}',
+  headline: '{{Twenty percent off everything}}',
+  accent: '{{Sat, Nov 29}}',
+  detail: '{{in store and online}}',
+  footerLeft: '{{Business name}}', footerRight: '{{@handle}}'
+};
+var FIELDS = [['eyebrow', 'Small label', false], ['headline', 'Headline', true], ['accent', 'The one highlighted fact', false],
+              ['detail', 'Supporting words', false], ['footerLeft', 'Footer, left', false], ['footerRight', 'Footer, right', false]];
+// Sizes and safe zones: check formats/social.md before trusting these.
+var SHAPES = {
+  feed:   { name: 'Feed post 4:5', w: 1080, h: 1350 },
+  square: { name: 'Square 1:1', w: 1080, h: 1080 },
+  story:  { name: 'Story 9:16', w: 1080, h: 1920, safe: { top: 250, bottom: 340 } }
+};
+
+/* ---------- state ---------- */
+var $ = function (s) { return document.querySelector(s); };
+var cv = $('#cv'), ctx = cv.getContext('2d');
+var spec = JSON.parse(JSON.stringify(START)), photo = null, guides = false, KEY = 'on-brand-edit:' + BRAND.name;
+try { var saved = JSON.parse(localStorage.getItem(KEY) || 'null'); if (saved && SHAPES[saved.shape]) spec = saved; } catch (e) {}
+function keep() { try { localStorage.setItem(KEY, JSON.stringify(spec)); } catch (e) {} }
+function status(t) { $('#status').textContent = t; }
+function pair() { return BRAND.pairs.filter(function (p) { return p.id === spec.pair; })[0] || BRAND.pairs[0]; }
+
+/* ---------- the one renderer: preview and download both call this ---------- */
+function wrap(c, text, maxW) {
+  var out = [];
+  String(text || '').split('\n').forEach(function (para) {
+    var line = '';
+    para.split(/\s+/).forEach(function (w) {
+      var t = line ? line + ' ' + w : w;
+      if (line && c.measureText(t).width > maxW) { out.push(line); line = w; } else line = t;
+    });
+    out.push(line);
+  });
+  return out;
+}
+function render(c, s, showGuides) {
+  var sh = SHAPES[s.shape], W = sh.w, H = sh.h, p = pair(), pad = 80;
+  var top = (sh.safe ? sh.safe.top : 0) + 96, bottom = H - (sh.safe ? sh.safe.bottom : 0) - 72;
+  var x = s.align === 'center' ? W / 2 : pad, maxW = W - pad * 2;
+  c.fillStyle = p.bg; c.fillRect(0, 0, W, H);
+  c.textAlign = s.align === 'center' ? 'center' : 'left'; c.textBaseline = 'top';
+  var y = top;
+  if (s.eyebrow) {
+    c.font = BRAND.body.replace(/^(\S+) /, '$1 28px '); c.fillStyle = p.soft;
+    try { c.letterSpacing = BRAND.eyebrowCaps ? '2px' : '0px'; } catch (e) {}
+    c.fillText(BRAND.eyebrowCaps ? s.eyebrow.toUpperCase() : s.eyebrow, x, y); y += 28 + 40;
+    try { c.letterSpacing = '0px'; } catch (e) {}
+  }
+  var hs = Math.round(112 * s.size);
+  c.font = BRAND.display.replace(/^(\S+) /, '$1 ' + hs + 'px '); c.fillStyle = p.text;
+  wrap(c, s.headline, maxW).forEach(function (l) { c.fillText(l, x, y); y += Math.round(hs * 1.1); });
+  y += 32;
+  c.font = BRAND.body.replace(/^(\S+) /, '$1 40px ');
+  var a = s.accent || '', d = s.detail || '', gap = a && d ? c.measureText(' ').width : 0;
+  var aw = c.measureText(a).width, dw = c.measureText(d).width;
+  if (aw + gap + dw <= maxW) {
+    var x0 = s.align === 'center' ? W / 2 - (aw + gap + dw) / 2 : pad; c.textAlign = 'left';
+    c.fillStyle = p.accent; c.fillText(a, x0, y); c.fillStyle = p.text; c.fillText(d, x0 + aw + gap, y); y += 56;
+    c.textAlign = s.align === 'center' ? 'center' : 'left';
+  } else {
+    c.fillStyle = p.accent; c.fillText(a, x, y); y += 56; c.fillStyle = p.text;
+    wrap(c, d, maxW).forEach(function (l) { c.fillText(l, x, y); y += 56; });
+  }
+  var footY = bottom - 28;
+  if (photo) {
+    var py = y + 40, ph = footY - 40 - py;
+    if (ph > 160) {
+      c.save(); c.beginPath();
+      if (c.roundRect) c.roundRect(pad, py, maxW, ph, BRAND.radius); else c.rect(pad, py, maxW, ph);
+      c.clip();
+      var k = Math.max(maxW / photo.width, ph / photo.height), iw = photo.width * k, ih = photo.height * k;
+      c.drawImage(photo, pad + (maxW - iw) / 2, py + (ph - ih) / 2, iw, ih); c.restore();
+    }
+  }
+  c.font = BRAND.body.replace(/^(\S+) /, '$1 28px '); c.fillStyle = p.soft;
+  c.textAlign = 'left'; c.fillText(s.footerLeft || '', pad, footY);
+  c.textAlign = 'right'; c.fillText(s.footerRight || '', W - pad, footY);
+  if (showGuides && sh.safe) {
+    c.fillStyle = 'rgba(255,0,80,.18)'; c.fillRect(0, 0, W, sh.safe.top); c.fillRect(0, H - sh.safe.bottom, W, sh.safe.bottom);
+  }
+}
+function draw() {
+  var sh = SHAPES[spec.shape]; if (cv.width !== sh.w || cv.height !== sh.h) { cv.width = sh.w; cv.height = sh.h; }
+  render(ctx, spec, guides);
+}
+function changed() { keep(); draw(); panel(); }
+
+/* ---------- the panel ---------- */
+function choice(box, items, cur, pick, cls) {
+  box.textContent = '';
+  items.forEach(function (it) {
+    var b = document.createElement('button'); b.type = 'button'; b.className = cls || ''; b.setAttribute('aria-pressed', String(it.id === cur));
+    if (it.bg) { var i = document.createElement('i'); i.style.background = it.bg; i.style.color = it.text; i.textContent = 'Aa'; b.appendChild(i); }
+    b.appendChild(document.createTextNode(it.name)); b.addEventListener('click', function () { pick(it.id); }); box.appendChild(b);
+  });
+}
+function panel() {
+  choice($('#pairs'), BRAND.pairs, spec.pair, function (id) { spec.pair = id; changed(); }, 'pair');
+  choice($('#aligns'), [{ id: 'left', name: 'Left' }, { id: 'center', name: 'Center' }], spec.align, function (id) { spec.align = id; changed(); });
+  choice($('#shapes'), Object.keys(SHAPES).map(function (k) { return { id: k, name: SHAPES[k].name }; }), spec.shape, function (id) { spec.shape = id; changed(); });
+  $('#size').textContent = Math.round(spec.size * 100) + '%';
+  var g = $('#guides-row'), safe = !!SHAPES[spec.shape].safe; g.hidden = !safe; g.style.display = safe ? 'block' : 'none';
+  $('#nophoto').hidden = !photo;
+  var n = String(spec.headline || '').trim().split(/\s+/).filter(Boolean).length, w = $('#hwarn');
+  if (w) { w.hidden = !(BRAND.headlineWords && n > BRAND.headlineWords); w.textContent = 'Your headlines run ' + BRAND.headlineWords + ' words or fewer. This one is ' + n + '.'; }
+}
+function words() {
+  var box = $('#words'); box.textContent = '';
+  FIELDS.forEach(function (f) {
+    var lab = document.createElement('label'), sp = document.createElement('span'), inp = document.createElement(f[2] ? 'textarea' : 'input');
+    sp.textContent = f[1]; if (!f[2]) inp.type = 'text'; inp.value = spec[f[0]] || '';
+    inp.addEventListener('input', function () { spec[f[0]] = inp.value; keep(); draw(); panel(); });
+    lab.appendChild(sp); lab.appendChild(inp); box.appendChild(lab);
+    if (f[0] === 'headline') { var w = document.createElement('p'); w.className = 'warn'; w.id = 'hwarn'; w.hidden = true; lab.appendChild(w); }
+  });
+}
+function bump(d) { spec.size = Math.min(1.25, Math.max(0.7, Math.round((spec.size + d) * 100) / 100)); changed(); }
+$('#smaller').addEventListener('click', function () { bump(-0.05); });
+$('#bigger').addEventListener('click', function () { bump(0.05); });
+$('#guides').addEventListener('change', function () { guides = $('#guides').checked; draw(); });
+$('#photo').addEventListener('change', function (e) {
+  var f = e.target.files[0]; if (!f) return;
+  var img = new Image(); img.onload = function () { photo = img; changed(); status('Photo added. It stays on your computer.'); };
+  img.onerror = function () { status('That file did not open as a picture. Try a JPG or PNG.'); }; img.src = URL.createObjectURL(f);
+});
+$('#nophoto').addEventListener('click', function () { photo = null; $('#photo').value = ''; changed(); });
+var armed = false;
+$('#reset').addEventListener('click', function () {
+  var b = $('#reset');
+  if (!armed) { armed = true; b.textContent = 'Click again to start over'; setTimeout(function () { armed = false; b.textContent = 'Start over'; }, 3000); return; }
+  armed = false; b.textContent = 'Start over'; spec = JSON.parse(JSON.stringify(START)); photo = null; $('#photo').value = ''; words(); changed(); status('Back to how Claude made it.');
+});
+$('#download').addEventListener('click', function () {
+  var sh = SHAPES[spec.shape], oc = document.createElement('canvas'); oc.width = sh.w; oc.height = sh.h;
+  render(oc.getContext('2d'), spec, false);      // same renderer, guides off
+  status('Downloading');
+  var name = (BRAND.name + ' ' + (spec.headline || 'post')).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60) + '-' + spec.shape + '.png';
+  try {
+    oc.toBlob(function (blob) {
+      if (!blob) { status('This view blocked the download. Right-click the picture and choose Save image.'); return; }
+      var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove();
+      status('Saved as ' + name + '. If nothing downloaded, right-click the picture and choose Save image.');
+    }, 'image/png');
+  } catch (e) { status('This view blocked the download. Right-click the picture and choose Save image.'); }
+});
+$('#fontnote').textContent = BRAND.fontNote;
+words(); panel(); draw();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+window.__edit = { spec: function () { return spec; }, render: render };
+})();
+</script>
+</body>
+</html>

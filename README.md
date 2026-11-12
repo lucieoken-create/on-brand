@@ -10,6 +10,10 @@ I'm Lucie Oken. I run [hijinx](https://hijinx.studio), and everything I make wit
 2. **Decide.** It asks you up to ten questions, one at a time, about the things no tool can see: who it's for, what each color is for, what your brand would never do, and how much text belongs on an image.
 3. **Make.** It writes your system and makes a test post, once without the system and once with it, so you can see the difference. After that, ask for social posts and banners, email headers, slides, PDFs and flyers, or a web page, and they follow your rules. Anything else visual works too; it just doesn't have its own rules file yet.
 
+## Edit what it makes
+
+Any single piece (a post, a banner, a flyer) can come back as an editable page. Change the words, switch between your own brand colors, pick a shape, download. Every option on the page is already in your system, so you can't knock it off-brand by exploring. You choose whether that happens every time, only when you say yes, or never. It doesn't save anything, so it works on every Claude plan.
+
 ## What you get
 
 A folder for your brand. The two files that matter most:
@@ -65,6 +69,12 @@ Check this flyer against my brand system.
 This repo is the source of truth. When I update the skill, the version number and changes are listed below. Claude Code users get updates through the plugin; claude.ai users download the new zip and upload it again. Your own DESIGN.md and PRODUCT.md never change when the skill does.
 
 **0.1.0** (November 2026): first release.
+
+## What's next
+
+- **Now:** the design system and pieces made from it.
+- **Now, new:** edit mode, described above.
+- **Later:** a brand studio. One page with your brand guide (logos, colors, type, which file to use where) and a place to make new pieces from a few starting layouts. The rules for building one are already in [`reference/editing.md`](plugins/on-brand/skills/on-brand/reference/editing.md), so you can ask Claude to try it today; a tested version comes in a later release.
 
 ## Credits
 

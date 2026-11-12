@@ -37,6 +37,16 @@ Show both side by side and name two or three specific differences ("the accent o
   If neither is available, say so and give them the HTML to open.
 - **claude.ai:** show the HTML so they can see it, and offer it as a file. Tell them they can screenshot it or open it in a browser and print to PDF.
 
+## Edit mode
+
+Check the `Edit mode:` line in the brand's SKILL.md and follow `reference/editing.md`:
+
+- `ask` (or no line): after showing the piece, offer once: "Want this as an editable page so you can tweak the words and colors yourself?"
+- `always`: build the editable page as the output, from `templates/edit-post.html`.
+- `never`: skip it.
+
+Edit mode is for single pieces with a few slots (social posts, banners, covers, email headers, flyers). In claude.ai, publish the page as an artifact when you can, so it opens beside the chat; otherwise hand over the HTML file to open in a browser. It needs no saving, so it works on every plan.
+
 ## After they see it
 
 Ask what's off, in their words. If the answer is a new rule ("never put text over the photo"), offer to add it with `update` so it sticks.
