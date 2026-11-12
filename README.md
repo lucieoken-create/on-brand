@@ -79,6 +79,10 @@ Your design system works for your site too, in three ways:
 
 It doesn't build or manage a whole site. For that, use your system with a tool made for it; [impeccable](https://github.com/pbakaus/impeccable) is a good one if you work in code.
 
+## Where I look
+
+Two of the interview questions are hard to answer cold: what your brand should feel like, and what it would never do. It helps to look at a lot of good work first and notice what you're drawn to. I keep a public list of the places I go for that, with the design skills and references I use most: [Where I look: inspo and resources for AI-assisted design](https://hijinx-studio.notion.site/design-resources).
+
 ## Good to know
 
 - **Some values are estimates.** Colors read from screenshots shift, and fonts can only be matched by eye. The skill marks these. Swap in exact values from your brand files when you can.
