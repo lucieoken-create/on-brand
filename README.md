@@ -57,6 +57,16 @@ Use my brand system to make an Instagram post for our holiday open house, Saturd
 Check this flyer against my brand system.
 ```
 
+## Using it for your website
+
+Your design system works for your site too, in three ways:
+
+- **Hand it to your website tool.** If you build with Lovable, Claude Code or another AI builder, give it your DESIGN.md and `tokens.css` so the site follows the same rules as your posts.
+- **Set up a site builder.** On Squarespace, Wix, Shopify or Webflow, ask Claude to turn your system into that builder's color, font and spacing settings.
+- **Make one page or one part of a page.** A landing page for an event, a link-in-bio page, or a single section such as a signup block, a pricing table or a header.
+
+It doesn't build or manage a whole site. For that, use your system with a tool made for it; [impeccable](https://github.com/pbakaus/impeccable) is a good one if you work in code.
+
 ## Good to know
 
 - **Some values are estimates.** Colors read from screenshots shift, and fonts can only be matched by eye. The skill marks these. Swap in exact values from your brand files when you can.
