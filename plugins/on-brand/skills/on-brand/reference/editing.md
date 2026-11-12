@@ -20,11 +20,15 @@ Edit mode fits single pieces with a few slots: social posts, banners, event cove
 
 ## The rules
 
+**Start from the output.** Before building any controls, look at the finished piece and list what a person would reasonably want to change: a word, the date, which color leads, the photo, the shape. Every item on that list gets a control. Anything nobody would change gets none. After building, go down the list again and confirm each change can be made from the panel.
+
 **1. The piece is data.** Everything that can change lives in one `spec` object: the words, the color pairing, the size step, the shape, the photo. The page never edits its own layout directly. A control changes the spec, and the spec is drawn again.
 
 **2. One renderer.** A single `render(ctx, spec)` function draws the piece. The preview calls it, and the download calls the same function at full size. What they see is what they get, because there is no second code path to drift.
 
 **3. Controls are named choices, never free values.** No color picker, no font menu, no pixel fields. Offer the pairings DESIGN.md allows ("Navy on cream", "Cream on navy"), a size stepper with a floor and a ceiling, left or center, photo on or off. Every option on the panel is already on-brand, so the person can't break the system by exploring.
+
+**One control per thing.** If two things can be wanted separately, they get separate controls: photo on or off is not tied to the color pairing, and the footer can be hidden without hiding the label. A single switch that turns two things off together is the most common complaint about a first-pass editor. Use a switch for on or off, a row of buttons for a choice between a few, and a stepper for more or less.
 
 **4. Only offer pairings that pass.** Run every text and background pairing through `scripts/contrast.py` before it goes in the editor. A pairing that fails for body text is left out, or kept for large headlines only and labeled that way.
 
@@ -38,11 +42,13 @@ Edit mode fits single pieces with a few slots: social posts, banners, event cove
 
 **9. Say what's happening in plain words.** One status line. "Ready", "Downloading", "This view blocked the download. Right-click the picture and save it." Every failure message says what to do next.
 
+**The editor itself is plain and tidy.** The page around the piece is neutral: grey, white and one dark text color, in a system font. It carries nobody's brand, on-brand's included, so the only brand on screen is the person's own piece. Plain is still designed: controls line up on one grid, boxes in a row share a height, labels don't wrap awkwardly, and nothing overlaps or leaves a ragged gap when the window is resized. People who care about design notice a sloppy editor and trust the output less.
+
 **10. Self-contained.** One HTML file, no outside scripts, stylesheets, fonts or images, since published pages can't load them. Fonts the brand owns or Google Fonts files are embedded as base64 when the files are on hand; otherwise the editor uses the fallback named in tokens.css and says so in a note. Photos come from the person's own upload and stay in their browser.
 
 **11. Don't depend on saving.** Saving edits between visits needs storage that is not on every plan. Edit mode works without it: edit, download, done. If you keep a draft in browser storage as a convenience, wrap it in try/catch and never promise it will be there.
 
-**12. Check it like a product.** Before handing it over: click every control, type a long headline and a blank one, try each shape, download once and open the file, and look at it in a narrow window. Fix what breaks before the person finds it.
+**12. Check it like a product.** Before handing it over: click every control, type a long headline and a blank one, try each shape, download once and open the file, and drag the window from wide to narrow, checking at several widths that rows of buttons stay even and nothing is cut off. Fix what breaks before the person finds it.
 
 ## Building one from the template
 
