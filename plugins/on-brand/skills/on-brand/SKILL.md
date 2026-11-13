@@ -20,6 +20,10 @@ Plus format rules for the pieces they make most, the principles and tools it nee
 
 **on-brand is used once per brand.** Its job is to produce the brand's own skill. After setup, that skill makes pieces, checks them and takes feedback by itself, in Claude, Codex or any tool that reads skills or `AGENTS.md`. Attaching DESIGN.md and PRODUCT.md to any chat still does most of the job.
 
+## Say what's coming
+
+At the start of `start`, before the first question, tell the person in two or three lines what will happen: you'll look at what they share, ask up to ten questions one at a time, write their brand system, make a test piece, and then save it as their own skill. Say it takes about half an hour, and that they can answer in a few words.
+
 ## Pick the mode
 
 Read the request and pick one. If it's unclear and no system exists yet, start with `start`.
