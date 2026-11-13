@@ -21,9 +21,11 @@ These are Lucie Oken's working rules for keeping AI-made pieces from looking lik
 10. **Images are placed on purpose.** A photo or figure sits fully inside the frame with room around it, or runs off an edge deliberately. Faces get breathing room. Use real photos the brand owns, or none.
 11. **Leave room at the edges.** Nothing touches the edge of the canvas, and the margin is the same on every piece in a set.
 12. **Look at it finished, at the size it will be seen.** Shrink a post to phone size before calling it done. Check every page of a PDF. Most problems only show up there.
+13. **Type has a fixed hierarchy.** Pick a few sizes and weights and give each one a job: one for the thing that leads, one for headings, one for reading, one for labels. Use nothing else. Five sizes where two would do, or a heavier weight with no reason behind it, is the quickest way a piece starts to look machine-made.
+14. **Precise to the pixel.** Use whole-pixel sizes and positions, with no fractions. Check the finished piece at full size and zoomed in: edges that are half a pixel off, text that renders blurry, a rule that's 1px in one place and 2px in another. Nobody notices when it's right; everyone feels it when it's wrong.
 
 ## Using these
 
 - **When making:** build with them in mind, then run down the list before showing the piece. Fix what fails without being asked.
 - **When checking someone's piece:** name which rule a problem falls under, in plain words, and say what to change.
-- **When the person pushes back on one:** it's their brand. Offer to write their preference into their system with `update`, so it holds next time.
+- **When the person pushes back on one:** it's their brand. Offer to write their preference into their system (DESIGN.md or PRODUCT.md), so it holds next time.

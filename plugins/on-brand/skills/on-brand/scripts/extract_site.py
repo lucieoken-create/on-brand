@@ -8,8 +8,8 @@ Part of the on-brand skill. Standard library only, so it runs anywhere Python 3.
 
 Prints JSON: custom properties, colors by frequency and context, fonts, Google Fonts,
 font sizes, corner radii, the styles on key elements (body, headings, links, buttons),
-theme color, logo and social-image candidates, and notes about anything that limits
-the result. Values come from the CSS, so they're exact, but a page that builds its
+shadows, theme color, logo and social-image candidates, image folders that look like an
+illustration library, and notes about anything that limits the result. Values come from the CSS, so they're exact, but a page that builds its
 styles with JavaScript will show less than a browser would.
 """
 
@@ -67,6 +67,25 @@ def fetch(src, base_dir=None):
         return None, f"{src}: {type(e).__name__}: {e}"
 
 
+def norm_url(u):
+    """Normalize a page URL so https://site.com and https://site.com/ count as one page."""
+    if not is_url(u):
+        return u
+    p = urlparse(u.split("#")[0])
+    path = p.path.rstrip("/") or ""
+    q = ("?" + p.query) if p.query else ""
+    return f"{p.scheme.lower()}://{p.netloc.lower()}{path}{q}"
+
+
+def image_path(src):
+    """Return the real image path, unwrapping Next.js /_next/image?url=... links."""
+    if "/_next/image" in src:
+        inner = parse_qs(urlparse(src).query).get("url", [""])[0]
+        if inner:
+            return inner
+    return src
+
+
 def resolve(ref, base, base_dir):
     if is_url(base):
         return urljoin(base, ref)
@@ -86,6 +105,7 @@ class PageParser(HTMLParser):
         self.theme_color, self.og_image, self.generator = None, None, None
         self.icons, self.logos, self.nav_links, self.google_fonts = [], [], [], []
         self.class_samples = []
+        self.images, self.logo_elements = [], []
         self._in_style = False
         self._style_buf = []
         self._nav_depth = 0
@@ -115,10 +135,15 @@ class PageParser(HTMLParser):
             self._nav_depth += 1
         if tag == "a" and self._nav_depth and a.get("href"):
             self.nav_links.append(a["href"])
-        if tag == "img":
-            blob = " ".join([a.get("src", ""), a.get("alt", ""), a.get("class", ""), a.get("id", "")]).lower()
-            if "logo" in blob and a.get("src"):
+        if tag == "img" and a.get("src"):
+            self.images.append(image_path(a["src"]))
+        blob = " ".join([a.get("src", ""), a.get("alt", ""), a.get("class", ""), a.get("id", ""),
+                         a.get("aria-label", "")]).lower()
+        if "logo" in blob:
+            if tag == "img" and a.get("src"):
                 self.logos.append(a["src"])
+            elif len(self.logo_elements) < 6:
+                self.logo_elements.append(f"<{tag}> with 'logo' in its attributes (likely an inline SVG or a wordmark set in type)")
         if a.get("style"):
             self.inline_styles.append(a["style"])
         if a.get("class") and len(self.class_samples) < 400:
@@ -205,6 +230,22 @@ def context_of(prop):
     return "other"
 
 
+def shadow_kind(value):
+    """Classify a shadow as hard offset (no blur), soft (blurred) or ring/other."""
+    v = re.sub(r"(rgba?|hsla?|var)\([^)]*\)", "", value.lower())
+    lengths = re.findall(r"-?[\d.]+(?:px|rem|em)?", v)
+    nums = []
+    for x in lengths[:3]:
+        try:
+            nums.append(float(re.sub(r"[a-z]+$", "", x)))
+        except ValueError:
+            pass
+    if len(nums) >= 2 and (nums[0] or nums[1]):
+        blur = nums[2] if len(nums) >= 3 else 0
+        return "hard offset (no blur)" if blur == 0 else "soft (blurred)"
+    return "ring or other"
+
+
 # ---------- CSS ----------
 
 def split_decls(body):
@@ -230,6 +271,7 @@ class CssStats:
         self.font_faces = set()
         self.sizes = Counter()
         self.radii = Counter()
+        self.shadows = Counter()
         self.key = defaultdict(dict)
         self.tailwind = False
 
@@ -278,6 +320,9 @@ class CssStats:
                     self.sizes[value] += 1
                 if prop == "border-radius":
                     self.radii[value] += 1
+                if (prop in ("box-shadow", "text-shadow") and value.strip().lower() not in ("none", "0", "initial", "inherit", "unset")
+                        and not value.strip().startswith("var(--tw-")):  # skip Tailwind's ring plumbing
+                    self.shadows[value.strip()] += 1
                 if not inline:
                     for sel in (s.strip() for s in selector.split(",")):
                         if sel in KEY_SELECTORS and prop in KEY_PROPS:
@@ -353,7 +398,7 @@ def main():
     stats = CssStats()
     agg = PageParser()
 
-    queue = [src if is_url(src) else os.path.abspath(src)]
+    queue = [norm_url(src) if is_url(src) else os.path.abspath(src)]
     visited = set()
     while queue and len(pages_read) < max(1, args.pages):
         page = queue.pop(0)
@@ -381,10 +426,12 @@ def main():
         agg.logos += [resolve(i, page, base_dir) for i in p.logos]
         agg.google_fonts += p.google_fonts
         agg.class_samples += p.class_samples
+        agg.images += [resolve(i, page, base_dir) for i in p.images]
+        agg.logo_elements += p.logo_elements
         if is_url(src):
             host = urlparse(src).netloc
             for href in p.nav_links:
-                full = urljoin(page, href).split("#")[0]
+                full = norm_url(urljoin(page, href))
                 u = urlparse(full)
                 if u.netloc == host and full not in visited and not re.search(r"\.(pdf|jpg|png|zip)$", u.path, re.I):
                     queue.append(full)
@@ -408,6 +455,10 @@ def main():
         notes.append("Very few colors found. The page may build its styles with JavaScript; screenshots or a browser tool will show more.")
     if errors:
         notes.append(f"{len(errors)} file(s) couldn't be read; see errors.")
+    if stats.font_faces and not agg.google_fonts:
+        notes.append("Fonts are self-hosted (see font_face_families). Many self-hosted fonts are Google Fonts loaded from the site's own server; check fonts.google.com before treating one as paid.")
+    if not agg.logos:
+        notes.append("No logo image found. Check social_image and icons: the logo may be an inline SVG or a wordmark set in type.")
 
     custom_colors = {k: v for k, v in stats.custom.items() if to_hex(v)}
     custom_fonts = {k: stats.deref(v) for k, v in stats.custom.items()
@@ -416,6 +467,14 @@ def main():
                     if re.search(r"radius|space|spacing|gap|size|tracking|leading", k, re.I)}
 
     colors = sorted(stats.colors.items(), key=lambda kv: -kv[1]["count"])[:24]
+
+    folders = defaultdict(set)
+    for img in dict.fromkeys(agg.images):
+        path = urlparse(img).path if is_url(img) else img
+        folder = os.path.dirname(path)
+        if folder and not folder.startswith("/_next"):
+            folders[folder].add(os.path.basename(path))
+    image_folders = {f: sorted(names) for f, names in sorted(folders.items(), key=lambda kv: -len(kv[1])) if len(names) >= 3}
     result = {
         "source": src,
         "method": "code (exact values)",
@@ -440,8 +499,10 @@ def main():
         },
         "font_sizes": dict(stats.sizes.most_common(12)),
         "corner_radii": dict(stats.radii.most_common(8)),
+        "shadows": [{"value": v, "count": n, "kind": shadow_kind(v)} for v, n in stats.shadows.most_common(8)],
         "key_elements": {k: {p: stats.deref(v) for p, v in props.items()} for k, props in stats.key.items() if props},
-        "logo_candidates": list(dict.fromkeys(agg.logos))[:6],
+        "logo_candidates": list(dict.fromkeys(agg.logos))[:6] or list(dict.fromkeys(agg.logo_elements))[:3],
+        "image_folders": dict(list(image_folders.items())[:5]),
         "icons": list(dict.fromkeys(agg.icons))[:4],
         "social_image": agg.og_image,
         "notes": notes,
