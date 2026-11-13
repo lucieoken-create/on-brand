@@ -84,7 +84,7 @@ After that round, setup is done. Say so, and hand the system over as its own ski
 1. **Install it** where they work, after checking the name is still free:
    - **Claude Code:** copy the folder to `~/.claude/skills/<folder name>/` (all their projects) or the project's `.claude/skills/` (this project only). Ask which.
    - **Codex:** copy it to their Codex skills folder, or keep it in the repo; the `AGENTS.md` inside points Codex at the files.
-   - **claude.ai:** zip the folder (the folder name must match the `name` in its SKILL.md) and walk them through uploading it: Customize > Skills > + > Create skill > Upload a skill.
+   - **claude.ai:** if Claude can save it as a skill straight from the chat (a card with a save button), use that. Otherwise zip the folder (the folder name must match the `name` in its SKILL.md) and walk them through uploading it: Customize > Skills > + > Create skill > Upload a skill. Either way, tell them in one line what a skill is: "It's saved to your account, so it works in any chat or project, not just this one."
    - **No code tools:** they already have DESIGN.md and PRODUCT.md as text; tell them to keep both together and attach them when making things.
 2. **Tell them, in a few lines,** what changes now:
    > Your brand system is set up and installed as its own skill, `<name>`. From here, you don't need on-brand: ask for what you want ("Make a LinkedIn post for our workshop on Dec 6") and your skill handles it. When something looks off, say so, and it writes the fix into your files so it holds next time. The files are yours, and they work in Claude, Codex and other tools that read them. Come back to on-brand to set up another brand or a client, or for a bigger rework.

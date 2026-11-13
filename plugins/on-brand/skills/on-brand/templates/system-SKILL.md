@@ -45,4 +45,4 @@ Feedback goes into these files, so it holds next time. When a new decision comes
 7. **Platform specs:** when a size changes, update the table in `formats/social.md` and its "Specs last checked" date.
 8. **A new kind of piece** they'll make again (a podcast cover, a business card) gets its own file in `formats/`.
 
-If this folder is uploaded to claude.ai as a skill, remind them to upload the updated folder again after changes, since uploaded skills don't update themselves.
+In claude.ai, if Claude offers to save the changes to the skill (a card in the chat), accept it. If it doesn't, download the updated folder as a zip and upload it again to replace the old version.
