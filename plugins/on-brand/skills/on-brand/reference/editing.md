@@ -14,7 +14,7 @@ The brand's own SKILL.md carries a line: `Edit mode: ask`, `always` or `never`.
 - `always`: every piece comes back editable. No question.
 - `never`: don't build one and don't offer.
 
-If they answer the offer with "always" or "stop asking", change the line with `update` and say so. An editable page costs more to make than a plain one, so say that once if they ask about usage.
+If they answer the offer with "always" or "stop asking", change the line in the brand's SKILL.md and say so. An editable page costs more to make than a plain one, so say that once if they ask about usage.
 
 Edit mode fits single pieces with a few slots: social posts, banners, event covers, email headers, flyers. For decks, long documents and web pages, offer plain changes in chat instead.
 

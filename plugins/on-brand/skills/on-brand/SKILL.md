@@ -16,7 +16,9 @@ A folder called `<brand>-design/` holding two files that matter most:
 - `DESIGN.md`: how the brand looks. Colors, type, spacing, shapes, and what it never does. Written in the open DESIGN.md format from Google Labs, so it also works in Claude Design, impeccable, Stitch and other tools.
 - `PRODUCT.md`: who it's for, the point of view, why each choice was made, and the copy rules. Named so impeccable can read it too.
 
-Plus format rules for the pieces they make most, a small SKILL.md so Claude loads the system automatically, and a test piece showing the difference. The files belong to the person. They work even without this skill: attaching them to any chat does most of the job.
+Plus format rules for the pieces they make most, the principles and tools it needs, a SKILL.md that makes the folder its own skill, and a test piece showing the difference. The files belong to the person.
+
+**on-brand is used once per brand.** Its job is to produce the brand's own skill. After setup, that skill makes pieces, checks them and takes feedback by itself, in Claude, Codex or any tool that reads skills or `AGENTS.md`. Attaching DESIGN.md and PRODUCT.md to any chat still does most of the job.
 
 ## Pick the mode
 
@@ -24,20 +26,22 @@ Read the request and pick one. If it's unclear and no system exists yet, start w
 
 | The person wants to | Mode | Read |
 | --- | --- | --- |
-| Set up their brand from scratch or from a site | `start` | `reference/pull.md`, `reference/decide.md`, `reference/write.md`, then `reference/make.md` for the test piece |
+| Set up their brand from scratch or from a site | `start` | `reference/pull.md`, `reference/decide.md`, `reference/write.md`, then `reference/make.md` for the test piece and one round of feedback |
 | Only extract a system from a site, guide or screenshots | `pull` | `reference/pull.md` |
 | Make a social post, email, deck, PDF, flyer or web page with an existing system | `make` | `reference/make.md` and the matching file in `formats/` (social, email, slides, documents, web) |
 | Tweak a piece themselves (change the words, switch colors, download) | `make`, editable | `reference/editing.md` and `templates/edit-post.html` |
 | Check whether a piece fits the system | `check` | `reference/check.md` |
 | Change a decision or add a new rule | `update` | `reference/update.md` |
 
-If the person attaches a DESIGN.md or PRODUCT.md (or the folder), the system exists: go straight to `make`, `check` or `update`.
+**If the brand already has its own skill** (a folder with DESIGN.md, PRODUCT.md and a SKILL.md, made by on-brand or otherwise), that skill is the one to use for making pieces and updating rules. Say so in one line and follow its files. on-brand's own modes are for setting up a new brand or client, checking a piece against a system, or a bigger rework.
+
+If the person attaches a DESIGN.md or PRODUCT.md without a skill around it, go straight to `make`, `check` or `update` with those files, and offer to wrap them into a skill (see `reference/write.md`).
 
 ## Where this is running
 
 Work out the environment once and pick methods to match. Don't ask the person what environment they're in.
 
-- **Claude Code or another agent with a shell and network:** you can run `scripts/extract_site.py` on a URL, save files to disk, and render HTML to PNG or PDF.
+- **Claude Code, Codex or another agent with a shell and network:** you can run `scripts/extract_site.py` on a URL, save files to disk, and render HTML to PNG or PDF (see Output in `reference/make.md` for fallbacks when Playwright isn't installed). Permission prompts for running scripts or fetching pages are normal; if one is declined or blocked, say so and use the next method.
 - **claude.ai:** you can run scripts in a sandbox that usually can't reach outside websites, and you can read attached PDFs and images. Ask for screenshots or a brand PDF instead of fetching the site, and deliver files as downloads (a zip for the folder).
 - **No code tools at all:** run the interview in chat and write DESIGN.md and PRODUCT.md as text blocks the person copies and saves.
 
@@ -52,6 +56,8 @@ Platform sizes and safe zones change. The social format file carries the date it
 ## Rules that apply in every mode
 
 - **Never invent brand facts.** If something is unknown, ask, or leave it out and say so. Every extracted value carries how sure you are: exact, read from page, or estimated.
+- **Evidence beats suggestions.** People accept most suggestions as written. Before suggesting a rule, check it against what you found, and name the evidence when they conflict. A habit seen in only one piece is a guess to confirm, not a rule.
+- **Use another brand skill only if asked.** If the person already has a skill or files for this brand, don't use them to fill in setup answers unless the person asks; the point of setup is to hear it from them.
 - **Confirm before writing.** Show a one-screen summary of decisions and wait for a yes or changes.
 - **Check contrast** on every text and background pair with `scripts/contrast.py` when you can run code (4.5:1 for body text, 3:1 for large headlines). Flag failures and suggest the nearest passing shade from their palette. Without code, estimate and say it's an estimate.
 - **Only use fonts they're allowed to use:** Google Fonts, or files they own. Say which is which. If their site uses a paid font they haven't licensed for other uses, suggest the closest Google Font and label it as a stand-in.

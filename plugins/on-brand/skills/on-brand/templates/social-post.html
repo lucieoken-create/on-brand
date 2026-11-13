@@ -18,7 +18,7 @@
   }
   .eyebrow {
     font-size: 28px; letter-spacing: var(--tracking-label); text-transform: uppercase;
-    color: var(--color-secondary);
+    color: var(--color-primary); /* label in the text color; change only if DESIGN.md says so */
   }
   .headline {
     font-family: var(--font-display); font-weight: var(--weight-display);
@@ -43,7 +43,8 @@
     <p class="eyebrow">{{short label, e.g. Small Business Saturday}}</p>
     <h1 class="headline">{{headline within the word limit}}</h1>
     <p class="detail"><span class="accent">{{the one accented fact, e.g. Sat, Nov 29}}</span> {{supporting words}}</p>
-    <!-- Optional photo. Delete this block if the brand doesn't use one here. -->
+    <!-- Optional image: a photo, an illustration or a pattern from assets/. Delete this block if the
+         brand doesn't use one here. For raster art on color, see "Illustrations" in reference/make.md. -->
     <div class="image" style="background-image: url('{{assets/photo.jpg}}')" role="img" aria-label="{{alt text}}"></div>
     <div class="footer"><span>{{Business name as written in PRODUCT.md}}</span><span>{{@handle or location}}</span></div>
   </div>
