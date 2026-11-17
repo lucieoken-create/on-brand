@@ -23,7 +23,7 @@ Ask one question, wait for my answer, then ask the next. Start each one with its
 5. What would never appear in my brand? Push me for at least five specifics.
 6. What logo, photos or patterns do I have, and anything I should never use? Is there a meaning in my logo?
 7. When something I make looks off, what's usually the reason?
-8. What do I make most: social posts or banners, email newsletters, slides, PDFs like proposals or guides, flyers, web pages? Then: do these rules hold for everything I make, or are there exceptions (for example, slides louder than my website)? Will I print anything?
+8. What do I make most: social posts or banners, email newsletters, slides, PDFs like proposals or guides, flyers, web pages? Then: do these rules hold for everything I make, or are there exceptions (for example, slides louder than my website)? Will I print anything? How do I want pieces handed to me: an image, a PowerPoint or Word file, or a file to finish in Canva or Adobe?
 9. How much text goes on an image (for example, a headline of six words or fewer, four or five short phrases at most)? What goes on the image and what goes in the caption? Sentence case or title case?
 10. Any words, punctuation or habits that should never show up? How is my business name written? How do I write my web address, email and handles on a piece? How do I write prices, dates and calls to action?
 

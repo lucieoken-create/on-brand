@@ -42,6 +42,11 @@ Show both side by side and name two or three specific differences ("the accent o
 
 ## Output
 
+Hand the piece over the way the brand's SKILL.md `Delivery:` line says, unless the request asks for something else.
+
+- **PowerPoint or Word:** build the file with the tool's built-in PowerPoint or Word skill where there is one (claude.ai has them), or `python-pptx` / `python-docx` with a shell. Use the exact colors from `tokens.css`, the fonts from DESIGN.md and the rules in the format file. Open or render it once before handing it over: Office files often swap in a default font or drift off the grid.
+- **To finish in Canva or Adobe:** hand over a PDF (or PowerPoint for decks). Canva and Adobe Express open both as editable designs when uploaded.
+
 - **Claude Code or Codex:** save the HTML. Render a PNG (social, email header) or PDF (documents) at the exact size in the format file, and look at it before showing it. Playwright works if it's installed:
 
   ```bash
@@ -100,4 +105,9 @@ After that round, setup is done. Say so, and hand the system over as its own ski
    - **No code tools:** they already have DESIGN.md and PRODUCT.md as text; tell them to keep both together and attach them when making things.
 2. **Tell them, in a few lines,** what changes now:
    > Your brand system is set up and installed as its own skill, `<name>`. From here, you don't need on-brand: ask for what you want ("Make a LinkedIn post for our workshop on Dec 6") and your skill handles it. When something looks off, say so, and it writes the fix into your files so it holds next time. The files are yours, and they work in Claude, Codex and other tools that read them. Come back to on-brand to set up another brand or a client, or for a bigger rework.
-3. **Suggest keeping a copy** somewhere they control (a Drive folder, a Git repo) as the source of truth, since an installed skill is a copy.
+3. **Point them to the kit** if they use Canva, Adobe or another design tool: "Your colors, fonts and logos are in `kit/`, with steps for adding them to Canva and Adobe." Say the plan limits in a line (Canva's free Brand Kit only holds a few colors; Adobe Express brand kits need Premium). If they finish pieces there, remind them that a PDF or PowerPoint opens as an editable design when uploaded.
+4. **Hand the brand to the Small Business pack's brand-style,** if they use it. That pack styles its own reports and pages from a short profile (Website, Brand colors, Logo) that its `brand-style` skill keeps in Cowork's memory, under a `## Business context` heading.
+   - **In Cowork, with that heading in memory:** offer to fill those fields with the same brand, show exactly what you'll write, and change only those fields after a yes. Brand colors: the main color and the background, by name and hex. Logo: the logo's web address if it has one.
+   - **Anywhere else:** give them one line to paste into a chat where the pack is installed: "Update my brand: <main color name> <hex> and <background name> <hex>, logo at <web address>."
+   - Say the limit plainly: brand-style holds two colors and a logo, so it gets a summary of the brand, and it needs the logo at a web address. The full system stays in their own skill.
+5. **Suggest keeping a copy** somewhere they control (a Drive folder, a Git repo) as the source of truth, since an installed skill is a copy.

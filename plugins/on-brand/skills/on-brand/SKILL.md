@@ -16,7 +16,7 @@ A folder called `<brand>-design/` holding two files that matter most:
 - `DESIGN.md`: how the brand looks. Colors, type, spacing, shapes, and what it never does. Written in the open DESIGN.md format from Google Labs, so it also works in Claude Design, impeccable, Stitch and other tools.
 - `PRODUCT.md`: who it's for, the point of view, why each choice was made, and the copy rules. Named so impeccable can read it too.
 
-Plus format rules for the pieces they make most, the principles and tools it needs, a SKILL.md that makes the folder its own skill, and a test piece showing the difference. The files belong to the person.
+Plus format rules for the pieces they make most, the principles and tools it needs, a SKILL.md that makes the folder its own skill, a kit for Canva, Adobe and other design tools (colors, fonts, logos, a swatch file and setup steps), and a test piece showing the difference. The files belong to the person.
 
 **on-brand is used once per brand.** Its job is to produce the brand's own skill. After setup, that skill makes pieces, checks them and takes feedback by itself, in Claude, Codex or any tool that reads skills or `AGENTS.md`. Attaching DESIGN.md and PRODUCT.md to any chat still does most of the job.
 
@@ -62,6 +62,12 @@ Work out the environment once and pick methods to match. Don't ask the person wh
 - **Claude Code, Codex or another agent with a shell and network:** you can run `scripts/extract_site.py` on a URL, save files to disk, and render HTML to PNG or PDF (see Output in `reference/make.md` for fallbacks when Playwright isn't installed). Permission prompts for running scripts or fetching pages are normal; if one is declined or blocked, say so and use the next method.
 - **claude.ai:** you can run scripts in a sandbox that usually can't reach outside websites, and you can read attached PDFs and images. Ask for screenshots or a brand PDF instead of fetching the site, and deliver files as downloads (a zip for the folder).
 - **No code tools at all:** run the interview in chat and write DESIGN.md and PRODUCT.md as text blocks the person copies and saves.
+
+## How pieces are delivered
+
+The interview asks how they want pieces: a finished image or PDF, an editable page, a PowerPoint or Word file, or a file to finish in Canva or Adobe. The answer goes in the brand's SKILL.md as a `Delivery:` line, and every piece follows it unless the request says otherwise. PowerPoint and Word files are built with the tool's own file skills where they exist (claude.ai has them), using the brand's exact tokens. Canva and Adobe both open a PDF or PowerPoint as an editable design when the person uploads it; Claude can't put files into those tools itself.
+
+If they use the Small Business pack, the handover also passes a summary of the brand to its `brand-style` skill (see "The handover" in `reference/make.md`).
 
 ## Editable pieces
 

@@ -22,6 +22,10 @@ Name it `<brand-slug>-design/`, for example `low-tide-goods-design/`. Before wri
     edit-post.html  from this skill's starter, filled in for this brand if they'll edit pieces (see below)
   scripts/
     contrast.py     copied from this skill: the contrast checker
+    make_ase.py     copied from this skill: writes the Adobe swatch file
+  kit/              for Canva, Adobe and other tools (see below)
+    brand-kit.md    from templates/brand-kit.md: colors, fonts, logos and setup steps
+    brand-colors.ase  from scripts/make_ase.py: the palette as an Adobe swatch file
   assets/           logo and image files they provided, and any versions you made from them
     fonts/          the font files and their licenses, when you can get them (see below)
   examples/         the test piece from make: before.html, after.html (and PNGs if rendered)
@@ -41,6 +45,13 @@ If you make versions they didn't send (a white logo from a colored one, a mark c
 
 Put the brand's font files in `assets/fonts/` with their licenses, so pieces render the same anywhere, including offline and in the editor. Google Fonts are free to ship this way. If Google Fonts is blocked (common in sandboxes), the same fonts come from npm: `npm install @fontsource/<font-name>` gives `.woff2` files and the license under `node_modules/@fontsource/<font-name>/`. Copy only the weights the system uses. Paid fonts never go in the folder unless the person says their license allows it.
 
+### The kit for other tools
+
+Everyone gets a `kit/` folder, so the brand travels to the tools they already use:
+
+- **`kit/brand-kit.md`** from `templates/brand-kit.md`: each color with its hex, RGB and job, the passing text pairs, the fonts and where to get them, the logo files and which background each goes on, and steps for Canva and Adobe. Keep the plan limits in it: Canva's free Brand Kit holds only a few colors, and Adobe Express brand kits need Premium. Cut the Canva or Adobe section only if they said they never use that tool.
+- **`kit/brand-colors.ase`**: run `python3 scripts/make_ase.py kit/brand-colors.ase --design DESIGN.md`. Illustrator, Photoshop and InDesign load it from the Swatches panel. Name colors in DESIGN.md's comments the way the person names them (`# Navy: all text`), so the swatches carry their names.
+
 ### The editor, filled in for the brand
 
 If they'll use editable pieces (`Edit mode: always` or `ask`), fill in `templates/edit-post.html` for their brand now, during setup, following `reference/editing.md`: their color pairings, fonts embedded, their mark and tag if they have them, word limits and refusals, and a layout for each shape. Then making an editable piece later only means changing the words. Mention editable pieces in the skill's `description` so it's clear the skill offers them. With `never`, copy the starter as it is, so it's there if they change their mind.
@@ -55,7 +66,7 @@ If they'll use editable pieces (`Edit mode: always` or `ask`), fill in `template
 - **Text in template slots:** the starter templates put small text (labels, footers, the highlighted fact) in a color slot. Before using one, check each slot's color against the passing pairs in DESIGN.md. If a palette's secondary or accent fails as small text, use the text color there, or put the fact in a block of the accent with readable text on it.
 - **formats/** files: copy the starter rules for each chosen format (social, email, slides, documents, web) and fill in the brand-specific parts (which colors go where, headline size in their font, word limits from their copy answers). Delete starter lines that conflict with their decisions. Keep the "Keep the specs current" section and the "Specs last checked" date in social.md; if you checked specs during setup, set the date to today.
 - **tokens.css**: one variable per token, same names as DESIGN.md.
-- **SKILL.md**: set `name` to the folder name (`<brand-slug>-design`, or the alternative if that was taken), fill in the brand name, list the kinds of pieces they make in the `description`, and set `Edit mode:` from their answer. Keep the "Keeping this system current" section as it is.
+- **SKILL.md**: set `name` to the folder name (`<brand-slug>-design`, or the alternative if that was taken), fill in the brand name, list the kinds of pieces they make in the `description`, and set `Delivery:` and `Edit mode:` from their answer. Keep the "Keeping this system current" section as it is.
 - Mark any value still **estimated** with a short comment so they can fix it later.
 
 ## Checks before handing over

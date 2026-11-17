@@ -23,3 +23,6 @@ Starter rules. Fill in the brand-specific lines when writing a system.
 ## Making the file
 
 Build as HTML (one section per slide at 1920 × 1080) or in their slide tool of choice following these rules. Check every slide at full size before sharing: no text touching the edges, nothing overflowing, every slide titled.
+
+- **PowerPoint:** use the tool's built-in PowerPoint skill where there is one, or `python-pptx`. Set the slide size to 16:9, use the exact hex colors and the brand's fonts, and name the fonts in the handover: if their computer doesn't have them, PowerPoint swaps in a default. Google Slides opens the same file (File > Import slides, or upload it to Drive).
+- **Canva or Adobe Express:** hand over the PowerPoint or a PDF. Both open as an editable design when uploaded.

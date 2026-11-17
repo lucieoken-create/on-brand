@@ -10,7 +10,7 @@ Extraction shows how the brand looks today. It can't tell you what each color is
 - **Show anything visual instead of describing it.** Corners, shadows, spacing, motion and font choices land when people can see them. Where you can show HTML or images, make a small side-by-side in their colors (three corner styles on the same card, three fonts on the same headline) and ask them to pick. Where you can't, describe each option by what it looks like, not its design name. People often pick something other than your recommendation once they see the options.
 - **Check every suggestion against the pull before you offer it.** People accept most suggestions as written, so a wrong suggestion becomes a wrong rule. If a suggestion goes against something the pull found, say so in the question: "Your site uses a hard offset shadow on the headshot. Keep it, or should shadows be on the never-list?" Never suggest a rule the evidence contradicts without naming the evidence.
 - **Plain words, and describe what things look like.** Say "the color for headlines", not "primary token"; "how rounded the corners are", not "border radius". Many people who care about design aren't designers, and design words get misread. When a word has more than one meaning, describe each one: "a soft, blurry shadow under a card" vs. "a solid block offset behind it, with no blur"; "art that runs off the edge of the page" instead of "bleed".
-- **Accept short answers.** "Yes", "not that", "whatever you think" are fine. For "whatever you think", make the call, say what you chose and why, and move on.
+- **Accept short answers.** "Yes", "not that", "whatever you think" are fine. For "whatever you think", make the call, say what you chose and why, and move on. "Skip" is always an answer too: use a sensible default, say what it is in a few words, and note it in the summary so they can change it later.
 - **Ten questions at most.** Skip any question the pull already answered with confidence; just confirm it in the summary.
 - If there was nothing to pull (no site, no guide), ask the same questions with examples instead of suggestions, and offer two or three concrete options for colors and fonts.
 
@@ -32,7 +32,14 @@ Ask in this order. The wording is a guide; adjust it to the person and what you 
    Then ask straight away: **"Do these rules hold for everything you make, or are there exceptions?"** For example, slides that are louder than the website, photos allowed in decks but not on the site, a color that fills whole slides but only appears in small doses on posts. Write exceptions into the matching format file.
    Two short follow-ups, in the same question:
    - **"Will you print anything?"** (Flyers, signs, bags, stickers, business cards.) If yes, the documents file gets print values: RGB, plus CMYK marked as a starting point to confirm with the printer, and a note to ask the printer for a Pantone match for anything printed in volume.
-   - **"When I make you a post, do you want a version you can edit yourself every time?"** It's a page where they change the words, pick between their brand's color pairings and sizes, and download the image. Their answer sets `Edit mode:` in their SKILL.md (`always`, `ask` or `never`). If they'd use one, it gets built during setup (see `reference/write.md`).
+   - **"When I make something for you, how do you want it?"** Offer the choices as a short list:
+     1. A finished image or PDF, ready to post or print
+     2. An editable page, where they change the words, pick between their brand's color pairings and sizes, and download the image
+     3. A PowerPoint or Word file
+     4. A file to finish in Canva or Adobe (a PDF or PowerPoint they upload there, where it opens as an editable design)
+     5. Whatever fits each piece
+
+     They can pick more than one ("images for posts, PowerPoint for decks"). The answer sets two lines in their SKILL.md: `Delivery:` in their words, and `Edit mode:` (`always` if they picked the editable page, `ask` for "whatever fits", otherwise `never`). If they'll use the editable page, it gets built during setup (see `reference/write.md`). If they work in Canva or Adobe, the handover gives them a kit for it (see "The handover" in `reference/make.md`).
 9. **Words on the page.** "How much text should go on an image? For example, a headline of six words or fewer and no more than four or five short phrases. What goes on the graphic, and what goes in the caption? Sentence case or title case for headlines?"
 10. **Copy habits.** "Any words, punctuation or habits that should never show up? Exclamation points, emoji, ALL CAPS, certain buzzwords? How is your business name written? How do you write your web address, email and social handles on a piece (for example, in capitals)? How do you write prices, dates and calls to action?"
 
@@ -46,7 +53,9 @@ Most people can't name their style, and a name helps every tool that reads the f
 
 ## The summary
 
-Before writing anything, show one screen that covers every decision, grouped: who it's for, colors with jobs and shares, type, shape and space, never do, assets, where it shows up (and any exceptions by output), copy rules, editable or not. Mark any contrast pair that fails.
+Before writing anything, show one screen that covers every decision, grouped: who it's for, colors with jobs and shares, type, shape and space, never do, assets, where it shows up (and any exceptions by output), copy rules, how pieces get delivered. Mark any contrast pair that fails.
+
+**Show it, too.** Next to the summary, where you can render HTML, show a small sample with the decisions applied: a mini post with their headline font, body font, colors in their jobs, their corner style, a tag or label, and their logo or mark. People catch a wrong color or font on a real piece that they'd read past in a list, and it costs far less to fix now than after five files are written. If they adjust ("darker blue", "less cream"), change it and show it again.
 
 End with a short list of what's still open: values that are estimated, habits seen only once, anything they said they'd decide later. List only real open items. If nothing is estimated, leave the line out: "Still estimated: none of the colors" reads as "the colors aren't exact."
 
