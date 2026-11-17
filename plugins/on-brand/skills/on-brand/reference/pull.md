@@ -17,6 +17,25 @@ Ask this every time, even when the person has already given a website address. A
 
 If it's neither, follow the "whose brand" rule in SKILL.md. If they only give a website, carry on: the interview will have more guesses to confirm.
 
+### If they haven't made much yet
+
+A new business, or one that has never made posts or decks, has nothing to send for item 2. That's fine, and common. Say so, and ask for what they do have instead:
+
+- a logo file, even a rough one, and the story behind it
+- a palette they picked (from a tool like Coolors, a paint chip, a photo)
+- photos of the place itself: the shop, the studio, the packaging, the signage, the counter
+- mood photos or screenshots of things they like the feel of
+- a neighbor, competitor or brand they like the look of, and one they don't
+- any writing about the business: a description, an about page, a voice doc
+
+The interview does more of the work for these brands. Expect more questions answered from scratch, and show options instead of describing them (see "How to ask" in `reference/decide.md`).
+
+### Reference or asset?
+
+Once you've seen what they shared, ask once, for everything together: **"Which of these can appear in your pieces, and which are just for the feel?"** List the files by name so they can answer in a word each. A mood photo, a competitor's post or a Pinterest screenshot is reference: learn from it, never put it in a piece. Their own logo, photos of their shop and files they own are assets.
+
+Look closely at reference photos for other businesses' logos, signs and packaging. They show a feel, not something to copy, and they never go in a piece. The "whose brand" rule in SKILL.md applies to them too.
+
 ### Why small and recent
 
 Ask for a few chosen pieces, not everything. Older work carries older decisions, and three years of posts averages the brand into something that isn't quite any version of it. Two kinds of input get different limits:
@@ -36,6 +55,8 @@ Try them in this order and stop when you have enough. Tell the person in one lin
 
 - **DESIGN.md, design tokens, a CSS file, a Figma or Claude Design export:** read it, map it to the DESIGN.md schema, and keep their names and wording. Tag values **exact**.
 - **Brand guide PDF:** read the text for hex, RGB or CMYK values, color names, font names, logo rules and usage notes. Values printed in the guide are **exact**. Colors you can only see in images are **estimated**. CMYK-only colors: convert to hex and tag **estimated**, since the conversion depends on the printer profile.
+- **A palette from a generator tool** (Coolors, Adobe Color, a screenshot of one): keep the hex values, which are **exact**. Drop the tool's own color names and descriptions ("sunshine gold", "calm and trustworthy"): the tool wrote them, not the person, and they can describe colors that aren't there. Ask what the colors mean to them instead.
+- **A logo file:** sample its color from the file. It's **exact**, and if it matches a palette swatch, that ties the two together.
 
 ### b. A website, with a shell and network (Claude Code, Codex)
 
@@ -98,6 +119,8 @@ Colors sampled from rendered PDFs or images shift slightly with color profiles. 
 If you have more than one page or piece, compare them. If they disagree, use the homepage or the newest piece as the source and note the differences. If they disagree a lot, ask which feels most like the brand now.
 
 ## 5. Report back
+
+Raise problems here, before the interview, so the person can react with what they prefer instead of being surprised later. The most common ones: a loved color that fails contrast as text (it can still be a fill or a background with a dark color for text on it), and a mismatch between materials (a cool palette and warm photos, a formal logo and a playful site).
 
 Show a short, plain summary, not raw JSON:
 

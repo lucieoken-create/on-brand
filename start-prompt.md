@@ -6,28 +6,28 @@ The questions come from the on-brand skill's interview (`plugins/on-brand/skills
 
 ## 1. Set up your brand system
 
-Start a new chat. Attach what you have: screenshots of your website (homepage, one inner page, and how it looks on your phone) or your current brand guide PDF, plus three to five recent things you've made that feel most like you now (a post, a deck, a PDF), and your logo. Skip older work; it carries old decisions. Nothing is fine too. Then paste this:
+Start a new chat. Attach what you have: screenshots of your website (homepage, one inner page, and how it looks on your phone) or your current brand guide PDF, plus three to five recent things you've made that feel most like you now (a post, a deck, a PDF), and your logo. Skip older work; it carries old decisions. Haven't made much yet? Attach what you have instead: a palette you picked, photos of your shop or packaging, a few mood pictures, a brand you like the look of. Nothing is fine too. Then paste this:
 
 ```
 I want to set up a simple design system for my brand so that everything you make for me looks like me. Please work through this with me in three parts.
 
 PART 1: LOOK AT WHAT I HAVE
-Look at anything I've attached. Tell me in plain words what you see: the colors (give hex codes, including lighter shades used for borders or small text), the fonts or the closest Google Fonts, how rounded the corners are, any shadows (none, soft and blurry, or solid offset blocks), how roomy or busy it feels, and the kind of images. From the things I've made, tell me the habits you see: how much text sits on an image, where each color shows up, what repeats. Say which values you read exactly (from a brand guide) and which you're estimating from images. If I didn't attach anything, skip to Part 2.
+Look at anything I've attached. Tell me in plain words what you see: the colors (give hex codes, including lighter shades used for borders or small text), the fonts or the closest Google Fonts, how rounded the corners are, any shadows (none, soft and blurry, or solid offset blocks), how roomy or busy it feels, and the kind of images. From the things I've made, tell me the habits you see: how much text sits on an image, where each color shows up, what repeats. Say which values you read exactly (from a brand guide) and which you're estimating from images. Then ask me once which of my files can appear in my pieces and which are just for the feel. If I didn't attach anything, skip to Part 2.
 
 PART 2: ASK ME QUESTIONS, ONE AT A TIME
-Ask one question, wait for my answer, then ask the next. For each one, suggest an answer based on what you saw so I can just react, and if your suggestion goes against something you saw, say so. Use plain words and describe what things look like rather than using design terms. No more than ten questions:
-1. Who am I making things for, and what should they feel in the first three seconds?
-2. Which color does most of the work, which is the background, and which accents are saved for important things (one or two, each with a job)? Roughly how much of each? Do I have names for these colors?
+Ask one question, wait for my answer, then ask the next. Start each one with its number and what it decides (for example, "Question 3 of 10: type"). If I've already answered something, skip it. For each one, suggest an answer based on what you saw so I can just react, and if your suggestion goes against something you saw, say so. Use plain words and describe what things look like rather than using design terms; if you can show me options side by side, do. No more than ten questions:
+1. Who am I making things for, and what should they feel in the first three seconds? Where does my business name come from?
+2. Which color does most of the work, which is the background, and which accents are saved for important things (one or two, each with a job)? Roughly how much of each? Do I have names for these colors? If I don't want a loud accent, how should the one important thing stand out?
 3. One font for headlines and one for everything else. Keep what I have, or change?
-4. Square corners or rounded? Lots of breathing room, or packed? Shadows: none, soft, or solid offset blocks? Anything that moves?
+4. Square corners or rounded? Lots of breathing room, or packed? Shadows: none, soft, or solid offset blocks? Do I make Reels, Stories or GIFs?
 5. What would never appear in my brand? Push me for at least five specifics.
-6. What logo, photos or patterns do I have, and anything I should never use?
+6. What logo, photos or patterns do I have, and anything I should never use? Is there a meaning in my logo?
 7. When something I make looks off, what's usually the reason?
-8. What do I make most: social posts or banners, email newsletters, slides, PDFs like proposals or guides, flyers, web pages? Then: do these rules hold for everything I make, or are there exceptions (for example, slides louder than my website)?
+8. What do I make most: social posts or banners, email newsletters, slides, PDFs like proposals or guides, flyers, web pages? Then: do these rules hold for everything I make, or are there exceptions (for example, slides louder than my website)? Will I print anything?
 9. How much text goes on an image (for example, a headline of six words or fewer, four or five short phrases at most)? What goes on the image and what goes in the caption? Sentence case or title case?
 10. Any words, punctuation or habits that should never show up? How is my business name written? How do I write my web address, email and handles on a piece? How do I write prices, dates and calls to action?
 
-Before Part 3, show me a one-screen summary of every decision and check that text colors are readable on their backgrounds. Wait for my OK.
+Before Part 3, show me a one-screen summary of every decision and check that text colors are readable on their backgrounds. A color I love that's too light for text can stay as a fill or background. List only what's really still open. Wait for my OK.
 
 PART 3: WRITE MY TWO FILES
 Write two files as separate code blocks I can copy and save with these exact names.

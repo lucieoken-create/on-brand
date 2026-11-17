@@ -27,14 +27,15 @@
     text-wrap: balance;
   }
   .detail { font-size: 40px; margin-top: var(--space-lg); }
-  .accent { color: var(--color-tertiary); }
+  .accent { color: var(--color-tertiary); } /* only if the accent passes contrast as text on this background (DESIGN.md);
+                                              otherwise use the text color, or put the fact in a block of the accent */
   .image {
     margin-top: auto; height: 420px; border-radius: var(--radius-md);
     background: var(--color-secondary) center / cover no-repeat;
   }
   .footer {
     margin-top: var(--space-lg); font-size: 28px; display: flex; justify-content: space-between;
-    color: var(--color-secondary);
+    color: var(--color-primary); /* small text stays in a color that passes contrast */
   }
 </style>
 </head>

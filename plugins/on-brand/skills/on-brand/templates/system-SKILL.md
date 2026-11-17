@@ -1,11 +1,13 @@
 ---
 name: {{brand-slug}}-design
-description: Use for anything visual made for {{Brand}}: social posts, flyers, slides, documents and web pages. Holds the brand's colors, type, layout rules, copy rules and what it never does, and keeps them current as feedback comes in.
+description: Use for anything visual made for {{Brand}}: {{the pieces they make, e.g. social posts, emails, flyers and slides}}{{, and returns single pieces as editable pages for light edits (words, photo, colors), if edit mode is on}}. Holds the brand's colors, type, layout rules, copy rules and what it never does, and keeps them current as feedback comes in.
 ---
 
 # {{Brand}} design system
 
 This is {{Brand}}'s own design system. It works on its own: making pieces, checking them and updating the rules all happen here, in any tool that reads skills or `AGENTS.md`.
+
+It covers how {{Brand}} looks, plus the copy rules that affect graphics. {{If they have a voice doc: For longer copy (captions, email bodies), follow `reference/voice.md`.}}
 
 ## Before making anything
 
@@ -30,7 +32,11 @@ After showing it, ask what's off. If they have a piece that already gets it righ
 
 Edit mode: ask
 
-(`ask`, `always` or `never`. This decides whether a finished piece also comes back as an editable page where the words and brand colors can be changed and the result downloaded. With `ask`, offer once after showing a piece. Build it from `templates/edit-post.html` following `reference/editing.md`.)
+(`ask`, `always` or `never`. This decides whether a finished piece also comes back as an editable page where the words and brand colors can be changed and the result downloaded. With `ask`, offer once after showing a piece. Build it from `templates/edit-post.html` following `reference/editing.md`. {{If the template was filled in during setup: It's already filled in with this brand's color pairings, fonts, marks and word limits; change the words in START, and render() only if the layout differs.}})
+
+**The first time you build an editable page for someone,** explain it in a few plain lines. In claude.ai it's an artifact: a small web page in their Claude account that opens next to the chat. It works as a mini studio for this one piece: they can change the words, swap the photo, pick a color pairing or switch sizes, then download. Every option is on-brand. Nothing saves automatically, so they should download what they want to keep. Publish it with the `downloads` capability so the download button works. If the page doesn't appear, they need "Code execution and file creation" turned on in Settings > Capabilities (on Team and Enterprise, an owner turns it on in Organization settings).
+
+**Where artifacts aren't available** (another AI tool, or the setting is off), hand over the editor as an .html file. Opened in any browser, it works fully, download included.
 
 ## Keeping this system current
 
@@ -44,5 +50,6 @@ Feedback goes into these files, so it holds next time. When a new decision comes
 6. **Visual rules get rendered before they're written.** Make the thing, look at it, then write the rule.
 7. **Platform specs:** when a size changes, update the table in `formats/social.md` and its "Specs last checked" date.
 8. **A new kind of piece** they'll make again (a podcast cover, a business card) gets its own file in `formats/`.
+9. **Keep the examples and the editor in step.** If a change affects what `examples/` shows (a new default mark, a new color), redo the example and its PNG, so it never shows an old rule. If it affects the editor (a pairing, a word limit, a mark), change `templates/edit-post.html` too.
 
 In claude.ai, if Claude offers to save the changes to the skill (a card in the chat), accept it. If it doesn't, download the updated folder as a zip and upload it again to replace the old version.

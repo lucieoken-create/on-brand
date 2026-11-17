@@ -22,7 +22,21 @@ Plus format rules for the pieces they make most, the principles and tools it nee
 
 ## Say what's coming
 
-At the start of `start`, before the first question, tell the person in two or three lines what will happen: you'll look at what they share, ask up to ten questions one at a time, write their brand system, make a test piece, and then save it as their own skill. Say it takes about half an hour, and that they can answer in a few words.
+At the start of `start`, before the first question, tell the person in a few plain lines what will happen and what they'll end up with. Cover:
+
+- what they're getting: their own skill, a set of brand files any AI tool can use to make on-brand graphics
+- how: you'll look at what they share, ask up to ten questions one at a time (short answers are fine), write the files, make a test piece and fix what's off
+- about half an hour
+- where it ends up: saved to their account as a skill (in claude.ai, under Customize > Skills), so it works in any chat or project. You'll walk them through saving it at the end.
+- the scope: this is about how the brand looks, plus the few writing rules that affect graphics (how many words go on an image). It isn't a full voice or content guide.
+
+For example:
+
+> We're going to build a skill for your business: a set of brand files that any AI tool can use to make graphics that look like you. I'll look at what you share, then ask ten questions, one at a time. Short answers are fine. It takes about half an hour. At the end you'll have your own skill for social posts, emails, flyers and more, and I'll show you how to save it to your account so it works in any chat.
+>
+> One note: this is about how your brand looks. We'll cover a few writing rules that affect graphics, like how many words go on an image, but not your whole voice.
+
+If they ask how it's saved partway through, answer then; don't make them wait for the end.
 
 ## Pick the mode
 
@@ -51,7 +65,9 @@ Work out the environment once and pick methods to match. Don't ask the person wh
 
 ## Editable pieces
 
-A piece can come back as an editable page: the person changes the words, switches between their own brand's color pairings and sizes, and downloads it. Whether to build one is set by the `Edit mode:` line in the brand's SKILL.md (`ask`, `always` or `never`; `ask` if the line is missing). `reference/editing.md` has the rules, and they also apply to anything bigger, like a brand studio.
+A piece can come back as an editable page: the person changes the words, switches between their own brand's color pairings and sizes, and downloads it. Whether to build one is set by the `Edit mode:` line in the brand's SKILL.md (`ask`, `always` or `never`; `ask` if the line is missing), which the interview asks about. If they'll use one, the editor is filled in for their brand during setup, so later pieces only change the words. `reference/editing.md` has the rules, including what to tell someone the first time they see one, and they also apply to anything bigger, like a brand studio.
+
+In claude.ai, the editable page is an artifact, which needs "Code execution and file creation" turned on (Settings > Capabilities; on Team and Enterprise plans an owner turns it on in Organization settings). Anywhere artifacts aren't available, hand the editor over as an .html file instead: it works fully when opened in any browser, download included.
 
 ## Specs change
 
@@ -65,7 +81,7 @@ Platform sizes and safe zones change. The social format file carries the date it
 - **Confirm before writing.** Show a one-screen summary of decisions and wait for a yes or changes.
 - **Check contrast** on every text and background pair with `scripts/contrast.py` when you can run code (4.5:1 for body text, 3:1 for large headlines). Flag failures and suggest the nearest passing shade from their palette. Without code, estimate and say it's an estimate.
 - **Only use fonts they're allowed to use:** Google Fonts, or files they own. Say which is which. If their site uses a paid font they haven't licensed for other uses, suggest the closest Google Font and label it as a stand-in.
-- **Whose brand is it?** Their own or a client's with permission is fine. For anyone else's site, treat it as reference: describe the feel and write an original system. Never copy another brand's logo, artwork, or exact palette and type pairing.
+- **Whose brand is it?** Their own or a client's with permission is fine. For anyone else's site, treat it as reference: describe the feel and write an original system. Never copy another brand's logo, artwork, or exact palette and type pairing. The same goes for mood photos and screenshots: other businesses' logos, signs or packaging in them are reference for a feel, never something to put in a piece.
 - **Check every piece against `reference/principles.md`** before showing it: one thing leads, the accent stays rare, alignment is deliberate, decoration has a job. The person's own system wins where they conflict.
 - **Don't let AI defaults creep in.** No emoji in headings, no gradient blobs, no rounded cards everywhere just because, no stock phrases ("unlock", "elevate", "seamless"), no new colors outside the system.
 - **Keep it short.** DESIGN.md under about 250 lines, PRODUCT.md under about 120. A non-designer should be able to read both in ten minutes.

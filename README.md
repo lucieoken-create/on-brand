@@ -23,7 +23,7 @@ Claude can already design things and hold a design system for you, right in a ch
 
 ## Edit what it makes
 
-Any single piece (a post, a banner, a flyer) can come back as an editable page. Change the words, switch between your own brand colors, pick a shape, download. Every option on the page is already in your system, so you can't knock it off-brand by exploring. You choose whether that happens every time, only when you say yes, or never. It doesn't save anything, so it works on every Claude plan.
+Any single piece (a post, a banner, a flyer) can come back as an editable page. Change the words, switch between your own brand colors, pick a shape, download. Every option on the page is already in your system, so you can't knock it off-brand by exploring. You choose whether that happens every time, only when you say yes, or never, and if you'll use it, the editor is set up for your brand during setup. It doesn't save anything, so it works on every Claude plan. In claude.ai it opens as an artifact next to the chat (that needs "Code execution and file creation" turned on). Anywhere else, it comes as an .html file that works in any browser, download included.
 
 ## What you get
 
@@ -80,6 +80,8 @@ Less than you'd think, as long as you choose it:
 - **Optional:** one piece that feels off or out of date, so it knows what to avoid.
 - **Your asset folder,** if you have one: logos, illustrations, patterns, fonts. If it's in Google Drive, Notion or Dropbox and that's connected, point it to the one folder; it'll list what's there and check with you before reading.
 
+**Haven't made much yet?** That's fine. A logo, a palette you picked, photos of your shop or packaging, a few mood pictures, and a brand you like the look of (and one you don't) are enough. The interview does more of the work, and it shows you options to pick from instead of asking you to describe them.
+
 Skip the archive. Three years of posts or every version of your guidelines carries old decisions along with the current ones, and the system comes out blurrier for it.
 
 ## What to expect
@@ -128,7 +130,7 @@ Two of the interview questions are hard to answer cold: what your brand should f
 
 This repo is the source of truth. When I update the skill, the version number and changes are listed below. Claude Code users get updates through the plugin; claude.ai users download the new zip and upload it again. Your own DESIGN.md and PRODUCT.md never change when the skill does.
 
-**Unreleased** (November 2026), from the first full test run: asks for recent work and an asset folder, not just a website; checks its suggestions against what it found; asks whether rules change between outputs; asks for color names, every tint, and how your web address is written; offers style names to react to; two new rules (type hierarchy, pixel precision); a rule for illustrations on color; fixes to the site extractor (pages read twice, shadows, logo, self-hosted Google Fonts, illustration folders); headless Chrome and PDF rendering fallbacks; a name check before writing; setup now ends after one round of feedback and a handover that installs your brand's own skill; that skill now works without on-brand (it carries the principles, contrast checker, editing rules and update steps).
+**Unreleased** (November 2026), from the first full test run: asks for recent work and an asset folder, not just a website; checks its suggestions against what it found; asks whether rules change between outputs; asks for color names, every tint, and how your web address is written; offers style names to react to; two new rules (type hierarchy, pixel precision); a rule for illustrations on color; fixes to the site extractor (pages read twice, shadows, logo, self-hosted Google Fonts, illustration folders); headless Chrome and PDF rendering fallbacks; a name check before writing; setup now ends after one round of feedback and a handover that installs your brand's own skill; that skill now works without on-brand (it carries the principles, contrast checker, editing rules and update steps). From the second test run (a new shop with no website and nothing made yet): a path for brands with light materials; one "use it or just for the feel?" question for everything shared; every interview question says which number it is and what it decides; visual choices shown side by side instead of described; questions about the story behind the name and logo, calm palettes with no pop color, printing, and whether you want editable pieces; a plain intro that says what you'll end up with and where it's saved; the editor is filled in for your brand during setup, has a mark and a date tag, lays out each shape on its own, warns when words run into the footer, and downloads inside a claude.ai artifact; fonts ship in your folder; organic Story safe zones; your skill never points to files outside its folder.
 
 **0.1.0** (November 2026): working draft, in testing. Not yet released.
 
