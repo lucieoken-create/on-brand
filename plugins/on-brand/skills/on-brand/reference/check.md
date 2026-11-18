@@ -7,9 +7,9 @@ The person shares something (an image, a PDF, a screenshot, a page) and wants to
 Go through these in order and note only real problems:
 
 1. **Colors.** Any color not in the tokens? Is the accent overused or used on the wrong things? Do the shares roughly match DESIGN.md?
-2. **Type.** Fonts other than the two in the system? Headline and body sizes in the right relationship? Case matches the copy rules?
+2. **Type.** Fonts other than the ones in the system? Only the sizes and weights the system defines, each used for its one job? Case matches the copy rules?
 3. **Contrast.** Any text that's hard to read against its background? Run `scripts/contrast.py` on sampled colors if you can; otherwise estimate and say so.
-4. **Shape and space.** Corners, borders and shadows match? Crowded where the brand is roomy, or the other way round?
+4. **Shape and space.** Corners, borders and shadows match? Crowded where the brand is roomy, or the other way round? Edges that nearly line up but don't? Gaps that don't come from the spacing scale? Look at it at full size and zoomed in; half-pixel offsets and blurry edges count.
 5. **Copy.** Over the word limit for the format? Banned words or punctuation? Business name written correctly? Facts in the caption that belong there?
 6. **Never do.** Anything from the Do's and Don'ts list?
 7. **AI defaults.** Emoji in headings, gradient blobs, generic rounded cards, stock phrases, a look that doesn't match their other pieces.

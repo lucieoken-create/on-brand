@@ -2,11 +2,15 @@
 
 Systems drift when new decisions live only in one chat. This mode folds them back into the files.
 
+Start by saying what's set now, in plain words ("Right now headlines are in the serif, in navy. What's changing?"), so someone changing one thing doesn't re-answer the rest.
+
 1. **Find where it belongs.** A look decision (color, type, shape, layout) goes in DESIGN.md and tokens.css. A why, audience or copy decision goes in PRODUCT.md. A rule for one kind of piece goes in that file in `formats/`. A "never" goes in Do's and Don'ts.
 2. **Confirm the wording** with the person in one line before changing anything.
 3. **Change the source first,** then anything that depends on it: a new color changes DESIGN.md's tokens and prose, tokens.css, and any format file that names colors.
 4. **Re-check contrast** if a color changed.
 5. **Log it.** Add a dated line under a "Changes" heading at the very end of DESIGN.md: `- 2026-11-20: added sage #8FA68E as a second background for seasonal posts.`
 6. **Spec updates** (a platform changed a size): change the table in the format file, set its "Specs last checked" date to today, and log it the same way.
-7. **Edit mode setting:** if they say "always make it editable", "ask me each time" or "stop offering", change the `Edit mode:` line in the brand's SKILL.md to `always`, `ask` or `never` and tell them.
-8. **Deliver the updated files** the same way as `write`. In claude.ai, if the system is uploaded as a skill, remind them to upload the new zip to replace it, since uploaded skills don't update themselves.
+7. **Delivery and edit mode:** if they say "always make it editable", "ask me each time" or "stop offering", change the `Edit mode:` line in the brand's SKILL.md to `always`, `ask` or `never`. If they want pieces handed over differently ("decks as PowerPoint from now on"), change the `Delivery:` line. Tell them what changed.
+8. **Changes apply from now on.** Never say pieces made before the change were updated. Offer to redo one if they want it.
+9. **Keep the kit in step.** If a color, font or logo changed, update the brand's `kit/` folder (re-run `scripts/make_ase.py`, the sheet and the visual guide), and tell them to update their Canva or Adobe brand kit and, if they use it, the Small Business pack's brand-style.
+10. **Deliver the updated files** the same way as `write`. In claude.ai, the save card Claude offers in the chat only updates SKILL.md. If the change touched only SKILL.md, the card is enough. If it touched other files too (DESIGN.md, PRODUCT.md, a format file, the editor, the examples), the card alone leaves those files saying the old thing. Hand over the updated folder as a zip and say it in one line: "The card saves the short version. Upload this zip to save everything: Customize > Skills, then replace the old one." If there's no card, give the zip the same way.

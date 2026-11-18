@@ -6,6 +6,7 @@ Part of the on-brand skill. Standard library only.
     python3 contrast.py "#1D2B3A" "#FAF7F2"          # one pair: text, then background
     python3 contrast.py --all "#1D2B3A" "#FAF7F2" "#E8664A" "#8FA68E"   # every pair
     python3 contrast.py --tokens tokens.css         # every pair of colors in a tokens file
+    python3 contrast.py --text "#1D2B3A" "#E8664A" --bg "#FAF7F2" "#1D2B3A"   # only real pairings
 
 Passing levels: 4.5:1 for body text, 3:1 for large text (about 24px+, or 19px+ bold) and for
 icons and borders that matter. 7:1 is the stricter AAA level for body text.
@@ -76,7 +77,22 @@ def main():
     ap.add_argument("colors", nargs="*", help="Hex colors")
     ap.add_argument("--all", action="store_true", help="Check every pair of the colors given")
     ap.add_argument("--tokens", help="Path to a tokens.css file; checks every pair of its hex colors")
+    ap.add_argument("--text", nargs="+", help="Text colors; use with --bg to check only text-on-background pairs")
+    ap.add_argument("--bg", nargs="+", help="Background colors; use with --text")
     args = ap.parse_args()
+
+    if args.text or args.bg:
+        if not (args.text and args.bg):
+            sys.exit("Use --text and --bg together.")
+        try:
+            texts = [(c, norm(c)) for c in args.text]
+            bgs = [(c, norm(c)) for c in args.bg]
+        except ValueError as e:
+            sys.exit(str(e))
+        rows = sorted(((ratio(a[1], b[1]), a, b) for a in texts for b in bgs if a[1] != b[1]), key=lambda r: -r[0])
+        for r, a, b in rows:
+            print(f"{r:5.2f}:1  {a[1]} on {b[1]}  {verdict(r)}")
+        return
 
     if args.tokens:
         named = tokens_from_css(args.tokens)

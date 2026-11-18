@@ -23,7 +23,11 @@ Claude can already design things and hold a design system for you, right in a ch
 
 ## Edit what it makes
 
-Any single piece (a post, a banner, a flyer) can come back as an editable page. Change the words, switch between your own brand colors, pick a shape, download. Every option on the page is already in your system, so you can't knock it off-brand by exploring. You choose whether that happens every time, only when you say yes, or never. It doesn't save anything, so it works on every Claude plan.
+Any single piece (a post, a banner, a flyer) can come back as an editable page. Change the words, switch between your own brand colors, pick a shape, download. Every option on the page is already in your system, so you can't knock it off-brand by exploring. You choose whether that happens every time, only when you say yes, or never, and if you'll use it, the editor is set up for your brand during setup. It doesn't save anything, so it works on every Claude plan. In claude.ai it opens as an artifact next to the chat (that needs "Code execution and file creation" turned on). Anywhere else, it comes as an .html file that works in any browser, download included.
+
+## Take it to Canva, Adobe and Office
+
+You choose how pieces come back: a finished image or PDF, an editable page, a PowerPoint or Word file, or a file to finish in Canva or Adobe (both open a PDF or PowerPoint as an editable design). Your folder also includes a kit for the tools you already use: your colors, fonts and logos on one sheet, a swatch file for Illustrator, Photoshop and InDesign, and steps for setting up a Canva or Adobe Express brand kit. If you use Claude's Small Business pack, it can hand your brand's colors and logo to that pack's brand-style skill, so its reports match too.
 
 ## What you get
 
@@ -32,9 +36,19 @@ A folder for your brand. The two files that matter most:
 - **DESIGN.md:** how your brand looks. Colors and their jobs, type, spacing, shapes, and your never-list. It uses the open [DESIGN.md format](https://github.com/google-labs-code/design.md) from Google Labs, so it also works with Claude's own design tools, impeccable, Stitch and others.
 - **PRODUCT.md:** who it's for, why it looks the way it does, and your copy rules.
 
-Plus size and layout rules for the things you make most, and a small skill file so Claude loads your system on its own. Social platforms change their sizes often, so your social rules carry the date they were last checked, and Claude looks up the current specs when they're out of date. The files are yours. They work even without this skill: attach them to any chat and most of the job is done.
+Plus a one-page visual guide to your brand (to keep, or send to a designer or printer), size and layout rules for the things you make most, the checks every piece goes through, and a skill file that makes the whole folder your brand's own skill. Social platforms change their sizes often, so your social rules carry the date they were last checked, and Claude looks up the current specs when they're out of date. The files are yours. They work even without this skill: attach them to any chat and most of the job is done.
 
-## Three ways to use it
+## After setup: your own skill
+
+You use on-brand once per brand. What it hands you at the end is your brand's own skill, installed where you work:
+
+1. **on-brand, once:** it looks at what you have, asks its questions, writes your files, makes a test piece, and takes one round of feedback.
+2. **The handover:** your system is installed as its own skill (say, `low-tide-goods-design`).
+3. **From then on, your skill:** ask for what you want ("Make a LinkedIn post for our workshop on Dec 6") without mentioning on-brand. When something looks off, say so, and your skill writes the fix into your files.
+
+Your skill doesn't need on-brand to keep working. It carries its own checks and its own update steps, and it works in Claude, Codex, and other tools that read skills or `AGENTS.md`. Come back to on-brand to set up another brand or a client, or for a bigger rework.
+
+## Four ways to use it
 
 **1. Claude Code.** Start Claude Code in Terminal (`claude`), then run:
 
@@ -45,9 +59,11 @@ Plus size and layout rules for the things you make most, and a small skill file 
 
 This is the most precise route: it reads your site's code for exact colors and fonts.
 
-**2. Upload it to claude.ai.** Coming with the first release, once testing is done: a single `on-brand.zip` on the [releases page](https://github.com/lucieoken-create/on-brand/releases). Until then, use route 1 or 3. When the zip is there: in claude.ai, go to Customize, then Skills, click +, then Create skill, then Upload a skill, and choose the zip. Skills work on every plan, as long as "Code execution and file creation" is on in Settings, then Capabilities. A skill you upload to claude.ai also loads in Claude Code when you sign in with the same account.
+**2. Upload it to claude.ai.** Coming with the first release, once testing is done: a single `on-brand.zip` on the [releases page](https://github.com/lucieoken-create/on-brand/releases). Until then, use route 1, 3 or 4. When the zip is there: in claude.ai, go to Customize, then Skills, click +, then Create skill, then Upload a skill, and choose the zip. Skills work on every plan, as long as "Code execution and file creation" is on in Settings, then Capabilities (newer layouts call it "Create and edit files"). On Enterprise, an owner has to turn on Skills for the organization first, and can turn off skills that members create. A skill you upload to claude.ai also loads in Claude Code when you sign in with the same account.
 
-**3. No install.** Copy the prompts in [start-prompt.md](start-prompt.md) into a new chat. You get the same interview and the same two files, without installing anything. Use this if your company account doesn't allow custom skills.
+**3. Codex.** Copy the `plugins/on-brand/skills/on-brand` folder into your Codex skills folder (`~/.codex/skills/on-brand/`), or into the repo you're working in, and ask Codex to use on-brand. The scripts are plain Python, and the system it writes includes an `AGENTS.md` so Codex follows it afterwards. <!-- Check the current Codex skills path before release. -->
+
+**4. No install.** Copy the prompts in [start-prompt.md](start-prompt.md) into a new chat. You get the same interview and the same two files, without installing anything. Use this if your company account doesn't allow custom skills.
 
 ## Use it
 
@@ -58,6 +74,27 @@ Use on-brand to set up my brand. My website is example.com.
 ```
 
 In claude.ai, attach screenshots of your site or a brand guide PDF instead of a link. Claude can read the words on a page from a link, but not its colors and fonts.
+
+## What to give it
+
+Less than you'd think, as long as you choose it:
+
+- **Where your brand is defined today:** your website, your current brand guide, or a design file. Just the latest version.
+- **Three to five recent things you've made that feel most like you now,** ideally one of each thing you make most (a post, a deck, a PDF). Your site shows your colors and fonts; your work shows how you use them, and that's where most of the rules come from.
+- **Optional:** one piece that feels off or out of date, so it knows what to avoid.
+- **Your asset folder,** if you have one: logos, illustrations, patterns, fonts. If it's in Google Drive, Notion or Dropbox and that's connected, point it to the one folder; it'll list what's there and check with you before reading.
+
+**Haven't made much yet?** That's fine. A logo, a palette you picked, photos of your shop or packaging, a few mood pictures, and a brand you like the look of (and one you don't) are enough. The interview does more of the work, and it shows you options to pick from instead of asking you to describe them.
+
+**Starting from nothing?** Bring three to five things you like the look of (a café, a book cover, a sign) and one thing you want to make. It shows you two or three directions on that piece, you pick one, and it builds from there. This takes longer than half an hour. It sets you up with colors, fonts and rules, but it doesn't design a logo, illustrations or animation; those get listed as open, for a designer or a later session. Stopping with just the visual guide is a fine finish too.
+
+Skip the archive. Three years of posts or every version of your guidelines carries old decisions along with the current ones, and the system comes out blurrier for it.
+
+## What to expect
+
+One run gets your foundations right: your colors and what each one is for, your fonts, spacing and shapes, your never-list and your copy rules. It won't know what you've learned from making things: how your decks differ from your posts, the fix for a PDF that rendered badly, the layout you settled on after three rounds with a client. Those come from use. When something looks off, say so, and the skill writes the fix into your system so it holds next time. That's how it goes from a good start to yours.
+
+When I tested it on my own brand, one afternoon matched the foundations of the design system I'd spent months refining. Most of what was missing were production details that only shipping real work teaches.
 
 After setup:
 
@@ -81,7 +118,7 @@ It doesn't build or manage a whole site. For that, use your system with a tool m
 
 ## What keeps it from looking like AI
 
-The skill carries twelve rules I check on everything I make, and it runs each piece against them before showing it to you: one thing leads, the accent color stays rare, the headline says something specific, decoration needs a job, and alignment is deliberate. That last one is the note I give most often on a first pass from any AI tool. The full list is in [`reference/principles.md`](plugins/on-brand/skills/on-brand/reference/principles.md). Your own system wins wherever it disagrees with mine.
+The skill carries fourteen rules I check on everything I make, and it runs each piece against them before showing it to you: one thing leads, the accent color stays rare, the headline says something specific, decoration needs a job, alignment is deliberate, type has a fixed hierarchy, and everything is precise to the pixel. Alignment is the note I give most often on a first pass from any AI tool. The full list is in [`reference/principles.md`](plugins/on-brand/skills/on-brand/reference/principles.md). Your own system wins wherever it disagrees with mine.
 
 ## Where I look
 
@@ -89,14 +126,18 @@ Two of the interview questions are hard to answer cold: what your brand should f
 
 ## Good to know
 
+- **It works best where Claude can show you pieces as it builds them:** claude.ai with "Code execution and file creation" turned on, or Claude Code. In tools that can't show you pieces, the interview still works, but choosing a look takes more back-and-forth.
 - **Some values are estimates.** Colors read from screenshots shift, and fonts can only be matched by eye. The skill marks these. Swap in exact values from your brand files when you can.
 - **Use it on your own brand,** or a client's with permission. Point it at someone else's site and it treats it as inspiration and writes an original system. It won't copy another brand's logo or exact look.
 - **Fonts:** it uses Google Fonts or font files you own, and tells you which. If your site uses a paid font, it suggests a free stand-in and labels it.
+- **Already have a skill for your brand?** It names your system `<brand>-design` and checks first that the name is free, so it won't overwrite or clash with a skill you've built. Run setup in a fresh project so the old skill doesn't fill in answers for you.
 - **It covers copy rules, not your whole voice.** Word limits, case, punctuation and banned words, yes. For how you sound in longer writing, pair it with a voice or writing-style skill.
 
 ## Updates
 
 This repo is the source of truth. When I update the skill, the version number and changes are listed below. Claude Code users get updates through the plugin; claude.ai users download the new zip and upload it again. Your own DESIGN.md and PRODUCT.md never change when the skill does.
+
+**Unreleased** (November 2026), from the first full test run: asks for recent work and an asset folder, not just a website; checks its suggestions against what it found; asks whether rules change between outputs; asks for color names, every tint, and how your web address is written; offers style names to react to; two new rules (type hierarchy, pixel precision); a rule for illustrations on color; fixes to the site extractor (pages read twice, shadows, logo, self-hosted Google Fonts, illustration folders); headless Chrome and PDF rendering fallbacks; a name check before writing; setup now ends after one round of feedback and a handover that installs your brand's own skill; that skill now works without on-brand (it carries the principles, contrast checker, editing rules and update steps). From the second test run (a new shop with no website and nothing made yet): a path for brands with light materials; one "use it or just for the feel?" question for everything shared; every interview question says which number it is and what it decides; visual choices shown side by side instead of described; questions about the story behind the name and logo, calm palettes with no pop color, printing, and whether you want editable pieces; a plain intro that says what you'll end up with and where it's saved; the editor is filled in for your brand during setup, has a mark and a date tag, lays out each shape on its own, warns when words run into the footer, and downloads inside a claude.ai artifact; fonts ship in your folder; organic Story safe zones; your skill never points to files outside its folder. Then, from comparing with Claude's Small Business pack: asks how you want pieces delivered (image, editable page, PowerPoint or Word, or a file for Canva or Adobe) and remembers it; shows a quick sample with your summary before writing; a kit for Canva and Adobe with a swatch file (new `make_ase.py`); a handoff to the Small Business pack's brand-style; updates start by saying what's set now, and never claim old pieces changed; "skip" is always an answer. From the third test run (a personal brand started from nothing): asks for one thing you want to make and tries every choice on it; a bounded path for starting from scratch (things to react to, two or three directions, pick one, try it on a second format), with logo, illustration and motion left as open decisions; reactions noted detail by detail; changes start from the version you picked, one at a time; fonts shown as real, labeled files across the whole type set; placeholders labeled; a second format in the test; opens the actual file before handing it over; a one-page visual guide in every kit, and stopping with just the guide is a valid finish. From the standalone Low Tide test: suggested details in captions get listed for you to confirm; the interview asks how you write times and hours; in claude.ai, your skill tells you when the save card is enough and when to upload the full zip.
 
 **0.1.0** (November 2026): working draft, in testing. Not yet released.
 

@@ -4,7 +4,7 @@ Read this before building an editable piece (edit mode) or anything bigger, like
 
 ## Edit mode in one paragraph
 
-A finished piece comes back as one page with the piece on one side and a short panel of controls on the other. The person changes the words, picks between the brand's own options, and downloads the result. Nothing is saved anywhere, so it works on every Claude plan. Start from `templates/edit-post.html`.
+A finished piece comes back as one page with the piece on one side and a short panel of controls on the other. The person changes the words, picks between the brand's own options, and downloads the result. Nothing is saved anywhere, so it works on every Claude plan (in claude.ai it needs "Code execution and file creation" turned on). Start from the brand's own `templates/edit-post.html`: if it was filled in during setup, most of the work is done.
 
 ## When to build one
 
@@ -14,7 +14,7 @@ The brand's own SKILL.md carries a line: `Edit mode: ask`, `always` or `never`.
 - `always`: every piece comes back editable. No question.
 - `never`: don't build one and don't offer.
 
-If they answer the offer with "always" or "stop asking", change the line with `update` and say so. An editable page costs more to make than a plain one, so say that once if they ask about usage.
+If they answer the offer with "always" or "stop asking", change the line in the brand's SKILL.md and say so. An editable page costs more to make than a plain one, so say that once if they ask about usage.
 
 Edit mode fits single pieces with a few slots: social posts, banners, event covers, email headers, flyers. For decks, long documents and web pages, offer plain changes in chat instead.
 
@@ -36,15 +36,19 @@ Edit mode fits single pieces with a few slots: social posts, banners, event cove
 
 **6. Words first.** Order the panel the way people edit: the words, then the look, then the shape, then download. Label fields by what they are in the piece ("Headline", "The date", "Footer, right"), in the person's vocabulary, never by element or variable name.
 
-**7. Shapes re-lay out. They never crop.** If the editor offers more than one size, each size is laid out again from the spec. Platform safe zones are drawn as a guide the person can switch on, shown in the preview only and never in the download.
+**7. Shapes re-lay out. They never crop.** If the editor offers more than one size, each size is laid out again from the spec, with its own values where one layout doesn't fit all: a shorter photo and a smaller headline on a square, a bigger photo filling the middle of a Story. Platform safe zones are drawn as a guide the person can switch on, shown in the preview only and never in the download. When the words run into the footer or out of the safe zone, show a plain note saying what to do ("Cut a few words, make the headline smaller or turn off the photo"). Render every shape with the longest likely words before handing it over.
 
 **8. Always a way back.** A "Start over" button returns the piece to how Claude made it. It takes two clicks, and the button says so after the first. If the editor has parts (slides, scenes), each part gets its own reset too.
 
 **9. Say what's happening in plain words.** One status line. "Ready", "Downloading", "This view blocked the download. Right-click the picture and save it." Every failure message says what to do next.
 
+**Downloads work inside an artifact and outside it.** A claude.ai artifact blocks a plain download link. Published as an artifact, the page needs the `downloads` capability: declare it when publishing (`downloads: true`), then in the page `claude.use('downloads')` resolves to an object whose `save({ filename, data })` offers the file; the person confirms, and may decline. `use()` resolves `null` where the capability isn't there, such as a file opened in a browser, and then the page falls back to a plain download link. The template does both. Never promise the save happened until it resolves.
+
 **The editor itself is plain and tidy.** The page around the piece is neutral: grey, white and one dark text color, in a system font. It carries nobody's brand, on-brand's included, so the only brand on screen is the person's own piece. Plain is still designed: controls line up on one grid, boxes in a row share a height, labels don't wrap awkwardly, and nothing overlaps or leaves a ragged gap when the window is resized. People who care about design notice a sloppy editor and trust the output less.
 
-**10. Self-contained.** One HTML file, no outside scripts, stylesheets, fonts or images, since published pages can't load them. Fonts the brand owns or Google Fonts files are embedded as base64 when the files are on hand; otherwise the editor uses the fallback named in tokens.css and says so in a note. Photos come from the person's own upload and stay in their browser.
+**10. Self-contained.** One HTML file, no outside scripts, stylesheets, fonts or images, since published pages can't load them. Fonts the brand owns or Google Fonts files are embedded as base64 when the files are on hand (`assets/fonts/`); otherwise the editor uses the fallback named in tokens.css and says so in a note. Marks and a starter photo can be embedded too. Photos the person uploads stay in their browser.
+
+Embedding adds up: fonts, a logo in three colors and a photo can pass half a megabyte. Embed only the weights the editor uses, shrink images to the largest size they're drawn at (a logo drawn 280px wide doesn't need a 2000px file), and save photos as JPEG. Keep one copy of the editor in the brand folder.
 
 **11. Don't depend on saving.** Saving edits between visits needs storage that is not on every plan. Edit mode works without it: edit, download, done. If you keep a draft in browser storage as a convenience, wrap it in try/catch and never promise it will be there.
 
@@ -53,10 +57,11 @@ Edit mode fits single pieces with a few slots: social posts, banners, event cove
 ## Building one from the template
 
 1. Copy `templates/edit-post.html`.
-2. Fill `BRAND`: the pairings (name, background, text, accent) from DESIGN.md, the display and body font stacks, the headline word limit and footer text from PRODUCT.md.
-3. Fill `START`, the spec for this piece, with the words and choices Claude made.
-4. If the layout in DESIGN.md differs from the template's (centered, photo-led, a rule under the eyebrow), change `render` to match. Keep it one function.
-5. Run the checks in rule 12.
+2. Fill `BRAND`: the pairings from DESIGN.md (name, background, text, and the tag and mark colors for each background), the display, body and label font stacks, the word limits and the never-list from PRODUCT.md.
+3. **The mark and the tag.** If the brand has a logo or a signature mark, embed the files (one per color the pairings need) in `MARKS` and keep the mark control: each mark the brand allows, plus "None". If it has only a logo, offer logo or none. If its pieces carry a date or time tag, keep the tag; if not, delete the tag field and leave the highlighted fact in the accent color.
+4. Fill `START`, the spec for this piece, with the words and choices Claude made.
+5. Set each shape's values in `SHAPES` (photo height, headline scale, mark size) and check the safe zones against `formats/social.md`. If the layout in DESIGN.md differs from the template's (centered, photo-led, a rule under the label), change `render` to match. Keep it one function.
+6. Run the checks in rule 12.
 
 ## Going further: a brand studio
 

@@ -4,9 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{Brand}}: edit this post</title>
-<!-- Edit mode starter. One page, no outside files. Fill BRAND and START in the script,
-     adapt render() to the layout in DESIGN.md, and follow reference/editing.md. -->
+<!-- Edit mode starter. One page, no outside files. Fill BRAND, MARKS, START and SHAPES in the script,
+     adapt render() to the layout in DESIGN.md, and follow reference/editing.md.
+     Published as a claude.ai artifact, declare the downloads capability so the download button works there. -->
 <style>
+  /* Embedded brand fonts go here, as @font-face rules with base64 data (see rule 10 in reference/editing.md). */
+
   * { box-sizing: border-box; }
   html, body { margin: 0; background: #f4f4f2; color: #222; font: 15px/1.5 system-ui, sans-serif; }
   main { display: grid; grid-template-columns: minmax(0, 1fr) 360px; min-height: 100vh; }
@@ -22,6 +25,7 @@
   input[type=text], textarea { width: 100%; font: inherit; padding: 8px 10px; border: 1px solid #bbb; border-radius: 4px; }
   textarea { resize: vertical; min-height: 60px; }
   .row { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; align-items: center; }
+  .row > .lead { width: 100%; font-size: 13px; color: #555; }
   button { font: inherit; padding: 8px 12px; border: 1px solid #bbb; background: #fff; border-radius: 4px; cursor: pointer; }
   button[aria-pressed=true] { border-color: #222; box-shadow: inset 0 0 0 1px #222; }
   button.main { background: #222; color: #fff; border-color: #222; padding: 10px 16px; }
@@ -30,6 +34,7 @@
   output { min-width: 5ch; text-align: center; }
   :focus-visible { outline: 2px solid #222; outline-offset: 2px; }
   #status { font-size: 13px; color: #555; min-height: 1.5em; }
+  [hidden] { display: none !important; }
   @media (max-width: 860px) { main { display: block; } .panel { border-left: 0; border-top: 1px solid #ddd; } .stage canvas { max-height: none; } }
 </style>
 </head>
@@ -45,13 +50,15 @@
     <h2>Words</h2>
     <div id="words"></div>
     <h2>Look</h2>
-    <div class="row" id="pairs" role="group" aria-label="Colors"></div>
+    <div class="row" id="pairs" role="group" aria-label="Colors"><span class="lead">Colors</span></div>
+    <div class="row" id="marks" role="group" aria-label="Mark"><span class="lead">Mark</span></div>
     <div class="row"><span>Headline size</span><button id="smaller" aria-label="Smaller headline">−</button><output id="size"></output><button id="bigger" aria-label="Bigger headline">+</button></div>
-    <div class="row" id="aligns" role="group" aria-label="Alignment"></div>
-    <div class="row"><label style="margin:0"><span>Photo (optional, stays on your computer)</span><input type="file" id="photo" accept="image/*"></label><button id="nophoto" hidden>Remove photo</button></div>
+    <div class="row" id="aligns" role="group" aria-label="Alignment"><span class="lead">Alignment</span></div>
+    <div class="row" id="photos" role="group" aria-label="Photo"><span class="lead">Photo</span></div>
+    <label><span>Use your own photo (it stays on your computer)</span><input type="file" id="photo" accept="image/*"></label>
     <h2>Shape</h2>
     <div class="row" id="shapes" role="group" aria-label="Shape"></div>
-    <label id="guides-row" hidden style="display:none"><input type="checkbox" id="guides"> Show what the app covers (preview only)</label>
+    <label id="guides-row" hidden><input type="checkbox" id="guides"> Show what the app covers (preview only)</label>
     <h2>Finish</h2>
     <div class="row"><button class="main" id="download">Download PNG</button><button id="reset">Start over</button></div>
     <p class="note" id="fontnote"></p>
@@ -63,128 +70,211 @@
 /* ---------- the brand: fill from DESIGN.md and PRODUCT.md ---------- */
 var BRAND = {
   name: '{{Brand}}',
-  // Only pairings that pass contrast (scripts/contrast.py). name, background, text, accent.
+  // Only pairings that pass contrast (scripts/contrast.py). For each background: the text color, the accent
+  // (for the highlighted fact; must pass too), the tag's fill and text, and which color of the mark sits on it.
   pairs: [
-    { id: 'light', name: '{{Navy on cream}}', bg: '{{#FAF7F2}}', text: '{{#1D2B3A}}', accent: '{{#C8553D}}', soft: '{{#5B6875}}' },
-    { id: 'dark',  name: '{{Cream on navy}}', bg: '{{#1D2B3A}}', text: '{{#FAF7F2}}', accent: '{{#E9A28F}}', soft: '{{#B9C2CB}}' }
+    { id: 'light', name: '{{Navy on cream}}', bg: '{{#FAF7F2}}', text: '{{#1D2B3A}}', accent: '{{#A8432F}}', tagBg: '{{#1D2B3A}}', tagText: '{{#FAF7F2}}', markColor: 'dark' },
+    { id: 'dark',  name: '{{Cream on navy}}', bg: '{{#1D2B3A}}', text: '{{#FAF7F2}}', accent: '{{#E9A28F}}', tagBg: '{{#FAF7F2}}', tagText: '{{#1D2B3A}}', markColor: 'light' }
   ],
-  display: '{{600}} {{"Headline font", Georgia, serif}}',   // weight, then the font stack from tokens.css
-  body: '{{400}} {{"Body font", system-ui, sans-serif}}',
-  headlineWords: 6,            // word limit from PRODUCT.md; 0 for none
-  eyebrowCaps: true,           // from the copy rules
-  radius: 0,                   // corner radius for the photo, from DESIGN.md
+  // Font shorthand with {s} where the size goes: weight, size, family stack from tokens.css.
+  display: '{{600}} {s}px {{"Headline font", Georgia, serif}}',
+  body: '{{400}} {s}px {{"Body font", system-ui, sans-serif}}',
+  label: '{{600}} {s}px {{"Body font", system-ui, sans-serif}}',
+  headlinePx: 104,             // headline size on a 1080-wide post at 100%
+  labelCaps: true,             // small label in spaced capitals, from the copy rules
+  allowCenter: true,           // false if DESIGN.md says text is always left-aligned
+  radius: 0,                   // corner radius for photos and the tag's ends, from DESIGN.md
+  headlineWords: 6,            // word limits from PRODUCT.md; 0 for none
+  supportWords: 0,
+  noExclamation: false,        // true if PRODUCT.md bans exclamation points on graphics
+  // Marks the brand allows, one per piece. place: 'corner' (whole, bottom right) or 'edge' (partly off the bottom-right edge).
+  // nudge [x, y] lines the visible drawing up with the margins when the file has empty space around it.
+  marks: [
+    { id: 'logo', name: 'Logo', place: 'corner', size: 0.24, nudge: [0, 0] }
+  ],
   fontNote: '{{Shown in a stand-in font here. The download uses the same one. For your exact fonts, ask Claude to embed the font files.}}'
 };
+// Mark files as data URIs, one per mark color the pairings use. Leave a mark out to hide it.
+var MARKS = {
+  logo: { dark: '', light: '' }
+};
+var STARTER_PHOTO = '';        // optional: a data URI of a photo the brand owns
 /* ---------- this piece: the spec Claude starts the person with ---------- */
 var START = {
-  shape: 'feed', pair: 'light', size: 1, align: 'left',
-  eyebrow: '{{Small Business Saturday}}',
+  shape: 'feed', pair: 'light', size: 1, align: 'left', mark: 'none', photo: 'none',
+  label: '{{Small Business Saturday}}',
   headline: '{{Twenty percent off everything}}',
   accent: '{{Sat, Nov 29}}',
-  detail: '{{in store and online}}',
+  support: '{{in store and online}}',
+  tag: '',
   footerLeft: '{{Business name}}', footerRight: '{{@handle}}'
 };
-var FIELDS = [['eyebrow', 'Small label', false], ['headline', 'Headline', true], ['accent', 'The one highlighted fact', false],
-              ['detail', 'Supporting words', false], ['footerLeft', 'Footer, left', false], ['footerRight', 'Footer, right', false]];
-// Sizes and safe zones: check formats/social.md before trusting these.
+// Delete the lines for slots this brand doesn't use (a brand without a date tag drops 'tag').
+var FIELDS = [
+  ['label', 'Small label above the headline', false],
+  ['headline', 'Headline (press Enter for a new line)', true],
+  ['accent', 'The one highlighted fact', false],
+  ['support', 'Supporting words', true],
+  ['tag', 'Date and time tag', false],
+  ['footerLeft', 'Footer, left', false],
+  ['footerRight', 'Footer, right', false]
+];
+// Sizes and safe zones: check formats/social.md before trusting these. Each shape gets its own photo height and headline scale.
 var SHAPES = {
-  feed:   { name: 'Feed post 4:5', w: 1080, h: 1350 },
-  square: { name: 'Square 1:1', w: 1080, h: 1080 },
-  story:  { name: 'Story 9:16', w: 1080, h: 1920, safe: { top: 250, bottom: 340 } }
+  feed:   { name: 'Feed post 4:5', w: 1080, h: 1350, photoH: 380, scale: 1 },
+  square: { name: 'Square 1:1',    w: 1080, h: 1080, photoH: 220, scale: 0.85 },
+  story:  { name: 'Story 9:16',    w: 1080, h: 1920, photoH: 600, scale: 1, vpad: 48, safe: { top: 250, bottom: 250 } }   // organic Stories; ads need more at the bottom
 };
 
 /* ---------- state ---------- */
 var $ = function (s) { return document.querySelector(s); };
 var cv = $('#cv'), ctx = cv.getContext('2d');
-var spec = JSON.parse(JSON.stringify(START)), photo = null, guides = false, KEY = 'on-brand-edit:' + BRAND.name;
-try { var saved = JSON.parse(localStorage.getItem(KEY) || 'null'); if (saved && SHAPES[saved.shape]) spec = saved; } catch (e) {}
+var spec = JSON.parse(JSON.stringify(START)), ownPhoto = null, guides = false, tooLong = false;
+var KEY = 'on-brand-edit:' + BRAND.name;
+var imgs = {};
+function load(key, src) { if (!src) return; var i = new Image(); i.onload = draw; i.src = src; imgs[key] = i; }
+Object.keys(MARKS).forEach(function (m) { Object.keys(MARKS[m]).forEach(function (c) { load(m + ':' + c, MARKS[m][c]); }); });
+load('starter', STARTER_PHOTO);
+try { var saved = JSON.parse(localStorage.getItem(KEY) || 'null'); if (saved && SHAPES[saved.shape] && saved.mark) { spec = saved; if (spec.photo === 'own') spec.photo = STARTER_PHOTO ? 'starter' : 'none'; } } catch (e) {}
 function keep() { try { localStorage.setItem(KEY, JSON.stringify(spec)); } catch (e) {} }
 function status(t) { $('#status').textContent = t; }
 function pair() { return BRAND.pairs.filter(function (p) { return p.id === spec.pair; })[0] || BRAND.pairs[0]; }
+function font(tpl, s) { return tpl.replace('{s}', Math.round(s)); }
+function count(t) { return String(t || '').trim().split(/\s+/).filter(Boolean).length; }
+function ready(i) { return i && i.complete && i.naturalWidth; }
+function markOn(s) { return BRAND.marks.filter(function (m) { return m.id === s.mark && ready(imgs[m.id + ':' + pair().markColor]); })[0] || null; }
+function availableMarks() { return BRAND.marks.filter(function (m) { return MARKS[m.id] && Object.keys(MARKS[m.id]).some(function (c) { return MARKS[m.id][c]; }); }); }
 
 /* ---------- the one renderer: preview and download both call this ---------- */
 function wrap(c, text, maxW) {
   var out = [];
   String(text || '').split('\n').forEach(function (para) {
     var line = '';
-    para.split(/\s+/).forEach(function (w) {
+    para.trim().split(/\s+/).forEach(function (w) {
+      if (!w) return;
       var t = line ? line + ' ' + w : w;
       if (line && c.measureText(t).width > maxW) { out.push(line); line = w; } else line = t;
     });
-    out.push(line);
+    if (line) out.push(line);
   });
   return out;
 }
+function spaced(c, on) { try { c.letterSpacing = on ? '4px' : '0px'; } catch (e) {} }
 function render(c, s, showGuides) {
-  var sh = SHAPES[s.shape], W = sh.w, H = sh.h, p = pair(), pad = 80;
-  var top = (sh.safe ? sh.safe.top : 0) + 96, bottom = H - (sh.safe ? sh.safe.bottom : 0) - 72;
-  var x = s.align === 'center' ? W / 2 : pad, maxW = W - pad * 2;
+  var sh = SHAPES[s.shape], W = sh.w, H = sh.h, p = pair(), pad = 96, maxW = W - pad * 2;
+  var vp = sh.vpad || pad, top = (sh.safe ? sh.safe.top : 0) + vp, footBase = H - (sh.safe ? sh.safe.bottom : 0) - vp;
+  var center = BRAND.allowCenter && s.align === 'center', x = center ? W / 2 : pad;
+  var boxes = [];   // every block of words drawn, for the overlap check at the end
+  function text(t, tx, ty, size) {
+    var w = c.measureText(t).width, x0 = c.textAlign === 'center' ? tx - w / 2 : c.textAlign === 'right' ? tx - w : tx;
+    c.fillText(t, tx, ty); boxes.push([x0, ty, x0 + w, ty + size]);
+  }
   c.fillStyle = p.bg; c.fillRect(0, 0, W, H);
-  c.textAlign = s.align === 'center' ? 'center' : 'left'; c.textBaseline = 'top';
-  var y = top;
-  if (s.eyebrow) {
-    c.font = BRAND.body.replace(/^(\S+) /, '$1 28px '); c.fillStyle = p.soft;
-    try { c.letterSpacing = BRAND.eyebrowCaps ? '2px' : '0px'; } catch (e) {}
-    c.fillText(BRAND.eyebrowCaps ? s.eyebrow.toUpperCase() : s.eyebrow, x, y); y += 28 + 40;
-    try { c.letterSpacing = '0px'; } catch (e) {}
+
+  // one mark per piece, drawn first so it never covers the words
+  var m = markOn(s), markBox = null;
+  if (m) {
+    var mi = imgs[m.id + ':' + p.markColor], ms = Math.round(W * m.size), mh = Math.round(ms * mi.naturalHeight / mi.naturalWidth), mx, my;
+    if (m.place === 'edge') { mx = W - Math.round(ms * 0.77) + m.nudge[0]; my = H - Math.round(mh * 0.73) + m.nudge[1]; }
+    else { mx = W - pad - ms + m.nudge[0]; my = footBase - mh + m.nudge[1]; }
+    c.drawImage(mi, mx, my, ms, mh); markBox = [mx, my, mx + ms, my + mh];
   }
-  var hs = Math.round(112 * s.size);
-  c.font = BRAND.display.replace(/^(\S+) /, '$1 ' + hs + 'px '); c.fillStyle = p.text;
-  wrap(c, s.headline, maxW).forEach(function (l) { c.fillText(l, x, y); y += Math.round(hs * 1.1); });
-  y += 32;
-  c.font = BRAND.body.replace(/^(\S+) /, '$1 40px ');
-  var a = s.accent || '', d = s.detail || '', gap = a && d ? c.measureText(' ').width : 0;
-  var aw = c.measureText(a).width, dw = c.measureText(d).width;
-  if (aw + gap + dw <= maxW) {
-    var x0 = s.align === 'center' ? W / 2 - (aw + gap + dw) / 2 : pad; c.textAlign = 'left';
-    c.fillStyle = p.accent; c.fillText(a, x0, y); c.fillStyle = p.text; c.fillText(d, x0 + aw + gap, y); y += 56;
-    c.textAlign = s.align === 'center' ? 'center' : 'left';
-  } else {
-    c.fillStyle = p.accent; c.fillText(a, x, y); y += 56; c.fillStyle = p.text;
-    wrap(c, d, maxW).forEach(function (l) { c.fillText(l, x, y); y += 56; });
+
+  var y = top, ph = s.photo === 'own' ? ownPhoto : (s.photo === 'starter' ? imgs.starter : null);
+  if (ready(ph) || (ph && ph.width)) {
+    var h = sh.photoH, pw = ph.naturalWidth || ph.width, phh = ph.naturalHeight || ph.height;
+    c.save(); c.beginPath();
+    if (c.roundRect) c.roundRect(pad, y, maxW, h, BRAND.radius); else c.rect(pad, y, maxW, h);
+    c.clip();
+    var k = Math.max(maxW / pw, h / phh), iw = pw * k, ih = phh * k;
+    c.drawImage(ph, Math.round(pad + (maxW - iw) / 2), Math.round(y + (h - ih) / 2), Math.round(iw), Math.round(ih)); c.restore();
+    y += h + 56;
   }
-  var footY = bottom - 28;
-  if (photo) {
-    var py = y + 40, ph = footY - 40 - py;
-    if (ph > 160) {
-      c.save(); c.beginPath();
-      if (c.roundRect) c.roundRect(pad, py, maxW, ph, BRAND.radius); else c.rect(pad, py, maxW, ph);
-      c.clip();
-      var k = Math.max(maxW / photo.width, ph / photo.height), iw = photo.width * k, ih = photo.height * k;
-      c.drawImage(photo, pad + (maxW - iw) / 2, py + (ph - ih) / 2, iw, ih); c.restore();
+
+  c.textAlign = center ? 'center' : 'left'; c.textBaseline = 'top'; c.fillStyle = p.text;
+  if (s.label) {
+    c.font = font(BRAND.label, 28); spaced(c, BRAND.labelCaps);
+    text(BRAND.labelCaps ? s.label.toUpperCase() : s.label, x, y, 28); spaced(c, false); y += 28 + 32;
+  }
+  var hs = Math.round(BRAND.headlinePx * s.size * (sh.scale || 1)), lh = Math.round(hs * 1.12);
+  c.font = font(BRAND.display, hs);
+  wrap(c, s.headline, maxW).forEach(function (l) { text(l, x, y, hs); y += lh; });
+
+  var a = s.accent || '', d = s.support || '';
+  if (a || d) {
+    y += 32; c.font = font(BRAND.body, 40);
+    var gap = a && d ? c.measureText(' ').width : 0, aw = c.measureText(a).width, dw = c.measureText(d).width;
+    if (aw + gap + dw <= maxW && d.indexOf('\n') < 0) {
+      var x0 = center ? W / 2 - (aw + gap + dw) / 2 : pad; c.textAlign = 'left';
+      c.fillStyle = p.accent; text(a, x0, y, 40); c.fillStyle = p.text; text(d, x0 + aw + gap, y, 40); y += 56;
+      c.textAlign = center ? 'center' : 'left';
+    } else {
+      if (a) { c.fillStyle = p.accent; text(a, x, y, 40); y += 56; }
+      c.fillStyle = p.text; wrap(c, d, maxW).forEach(function (l) { text(l, x, y, 40); y += 56; });
     }
   }
-  c.font = BRAND.body.replace(/^(\S+) /, '$1 28px '); c.fillStyle = p.soft;
-  c.textAlign = 'left'; c.fillText(s.footerLeft || '', pad, footY);
-  c.textAlign = 'right'; c.fillText(s.footerRight || '', W - pad, footY);
+
+  if (s.tag) {
+    y += 32; c.font = font(BRAND.label, 28); spaced(c, true);
+    var t = s.tag.toUpperCase(), bw = Math.round(c.measureText(t).width) + 64, bx = center ? Math.round(W / 2 - bw / 2) : pad;
+    c.fillStyle = p.tagBg; c.beginPath();
+    if (c.roundRect) c.roundRect(bx, y, bw, 64, Math.min(32, Math.max(BRAND.radius, 0))); else c.rect(bx, y, bw, 64);
+    c.fill(); c.textAlign = 'left'; c.fillStyle = p.tagText; c.fillText(t, bx + 32, y + 18); spaced(c, false); boxes.push([bx, y, bx + bw, y + 64]); y += 64;
+  }
+
+  c.fillStyle = p.text; c.font = font(BRAND.body, 28); c.textBaseline = 'alphabetic';
+  c.textAlign = 'left'; if (s.footerLeft) c.fillText(s.footerLeft, pad, footBase);
+  // a mark of either kind owns the bottom-right corner, so the right footer steps aside while it's on
+  c.textAlign = 'right'; if (s.footerRight && !m) c.fillText(s.footerRight, W - pad, footBase);
+
   if (showGuides && sh.safe) {
     c.fillStyle = 'rgba(255,0,80,.18)'; c.fillRect(0, 0, W, sh.safe.top); c.fillRect(0, H - sh.safe.bottom, W, sh.safe.bottom);
   }
+  // true when any block of words runs into the footer or the mark (with a 32px gap)
+  return boxes.some(function (b) {
+    if (b[3] > footBase - 28 - 32) return true;
+    return markBox && b[0] < markBox[2] + 32 && b[2] > markBox[0] - 32 && b[1] < markBox[3] + 32 && b[3] > markBox[1] - 32;
+  });
 }
 function draw() {
   var sh = SHAPES[spec.shape]; if (cv.width !== sh.w || cv.height !== sh.h) { cv.width = sh.w; cv.height = sh.h; }
-  render(ctx, spec, guides);
+  tooLong = render(ctx, spec, guides);
+  var w = $('#fitwarn'); if (w) w.hidden = !tooLong;
 }
 function changed() { keep(); draw(); panel(); }
 
 /* ---------- the panel ---------- */
 function choice(box, items, cur, pick, cls) {
-  box.textContent = '';
+  var lead = box.querySelector('.lead'); box.textContent = ''; if (lead) box.appendChild(lead);
   items.forEach(function (it) {
     var b = document.createElement('button'); b.type = 'button'; b.className = cls || ''; b.setAttribute('aria-pressed', String(it.id === cur));
     if (it.bg) { var i = document.createElement('i'); i.style.background = it.bg; i.style.color = it.text; i.textContent = 'Aa'; b.appendChild(i); }
     b.appendChild(document.createTextNode(it.name)); b.addEventListener('click', function () { pick(it.id); }); box.appendChild(b);
   });
 }
+function warn(id, show, text) { var w = $('#' + id); if (!w) return; w.hidden = !show; if (show) w.textContent = text; }
 function panel() {
   choice($('#pairs'), BRAND.pairs, spec.pair, function (id) { spec.pair = id; changed(); }, 'pair');
+  var marks = availableMarks();
+  $('#marks').hidden = !marks.length;
+  choice($('#marks'), marks.map(function (m) { return { id: m.id, name: m.name }; }).concat([{ id: 'none', name: 'None' }]), spec.mark, function (id) { spec.mark = id; changed(); });
+  $('#aligns').hidden = !BRAND.allowCenter;
   choice($('#aligns'), [{ id: 'left', name: 'Left' }, { id: 'center', name: 'Center' }], spec.align, function (id) { spec.align = id; changed(); });
+  var opts = [];
+  if (STARTER_PHOTO) opts.push({ id: 'starter', name: 'Starter photo' });
+  if (ownPhoto) opts.push({ id: 'own', name: 'Your photo' });
+  opts.push({ id: 'none', name: 'No photo' });
+  choice($('#photos'), opts, spec.photo, function (id) { spec.photo = id; changed(); });
   choice($('#shapes'), Object.keys(SHAPES).map(function (k) { return { id: k, name: SHAPES[k].name }; }), spec.shape, function (id) { spec.shape = id; changed(); });
   $('#size').textContent = Math.round(spec.size * 100) + '%';
-  var g = $('#guides-row'), safe = !!SHAPES[spec.shape].safe; g.hidden = !safe; g.style.display = safe ? 'block' : 'none';
-  $('#nophoto').hidden = !photo;
-  var n = String(spec.headline || '').trim().split(/\s+/).filter(Boolean).length, w = $('#hwarn');
-  if (w) { w.hidden = !(BRAND.headlineWords && n > BRAND.headlineWords); w.textContent = 'Your headlines run ' + BRAND.headlineWords + ' words or fewer. This one is ' + n + '.'; }
+  $('#guides-row').hidden = !SHAPES[spec.shape].safe;
+  var n = count(spec.headline), m = count(spec.support);
+  warn('hwarn', BRAND.headlineWords && n > BRAND.headlineWords, 'Your headlines run ' + BRAND.headlineWords + ' words or fewer. This one is ' + n + '.');
+  warn('swarn', BRAND.supportWords && m > BRAND.supportWords, 'The supporting words work best at ' + BRAND.supportWords + ' words or fewer. This is ' + m + '. Put the rest in the caption.');
+  var all = FIELDS.map(function (f) { return spec[f[0]] || ''; }).join(' ');
+  warn('xwarn', BRAND.noExclamation && /!/.test(all), 'No exclamation points on your graphics.');
+  var mk = markOn(spec);
+  warn('cwarn', !!(mk && spec.footerRight), 'Hidden while the ' + (mk ? mk.name.toLowerCase() : 'mark') + ' sits in that corner.');
 }
 function words() {
   var box = $('#words'); box.textContent = '';
@@ -193,8 +283,11 @@ function words() {
     sp.textContent = f[1]; if (!f[2]) inp.type = 'text'; inp.value = spec[f[0]] || '';
     inp.addEventListener('input', function () { spec[f[0]] = inp.value; keep(); draw(); panel(); });
     lab.appendChild(sp); lab.appendChild(inp); box.appendChild(lab);
-    if (f[0] === 'headline') { var w = document.createElement('p'); w.className = 'warn'; w.id = 'hwarn'; w.hidden = true; lab.appendChild(w); }
+    var ids = { headline: ['hwarn'], support: ['swarn'], footerRight: ['cwarn'] }[f[0]] || [];
+    ids.forEach(function (id) { var w = document.createElement('p'); w.className = 'warn'; w.id = id; w.hidden = true; lab.appendChild(w); });
   });
+  ['xwarn', 'fitwarn'].forEach(function (id) { var w = document.createElement('p'); w.className = 'warn'; w.id = id; w.hidden = true; box.appendChild(w); });
+  $('#fitwarn').textContent = 'The words are running into the footer or the mark. Cut a few words, make the headline smaller, turn off the photo or the mark.';
 }
 function bump(d) { spec.size = Math.min(1.25, Math.max(0.7, Math.round((spec.size + d) * 100) / 100)); changed(); }
 $('#smaller').addEventListener('click', function () { bump(-0.05); });
@@ -202,16 +295,33 @@ $('#bigger').addEventListener('click', function () { bump(0.05); });
 $('#guides').addEventListener('change', function () { guides = $('#guides').checked; draw(); });
 $('#photo').addEventListener('change', function (e) {
   var f = e.target.files[0]; if (!f) return;
-  var img = new Image(); img.onload = function () { photo = img; changed(); status('Photo added. It stays on your computer.'); };
-  img.onerror = function () { status('That file did not open as a picture. Try a JPG or PNG.'); }; img.src = URL.createObjectURL(f);
+  var img = new Image();
+  img.onload = function () { ownPhoto = img; spec.photo = 'own'; changed(); status('Photo added. It stays on your computer.'); };
+  img.onerror = function () { status('That file did not open as a picture. Try a JPG or PNG.'); };
+  img.src = URL.createObjectURL(f);
 });
-$('#nophoto').addEventListener('click', function () { photo = null; $('#photo').value = ''; changed(); });
 var armed = false;
 $('#reset').addEventListener('click', function () {
   var b = $('#reset');
   if (!armed) { armed = true; b.textContent = 'Click again to start over'; setTimeout(function () { armed = false; b.textContent = 'Start over'; }, 3000); return; }
-  armed = false; b.textContent = 'Start over'; spec = JSON.parse(JSON.stringify(START)); photo = null; $('#photo').value = ''; words(); changed(); status('Back to how Claude made it.');
+  armed = false; b.textContent = 'Start over'; spec = JSON.parse(JSON.stringify(START)); ownPhoto = null; $('#photo').value = ''; words(); changed(); status('Back to how Claude made it.');
 });
+
+/* ---------- download: the artifact's downloads capability when there is one, a plain link otherwise ---------- */
+var dl = null;
+try { if (window.claude && window.claude.use) window.claude.use('downloads').then(function (n) { dl = n; }).catch(function () {}); } catch (e) {}
+function saveBlob(blob, name) {
+  if (dl) {
+    dl.save({ filename: name, data: blob }).then(function () { status('Saved as ' + name + '.'); })
+      .catch(function (e) {
+        var c = e && e.code;
+        status(c === 'declined' ? 'Download cancelled.' : c === 'rate_limited' ? 'A download is already waiting for you to confirm.' : 'The download did not go through here. Right-click the picture and choose Save image.');
+      });
+    return;
+  }
+  var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove();
+  status('Saved as ' + name + '. If nothing downloaded, right-click the picture and choose Save image.');
+}
 $('#download').addEventListener('click', function () {
   var sh = SHAPES[spec.shape], oc = document.createElement('canvas'); oc.width = sh.w; oc.height = sh.h;
   render(oc.getContext('2d'), spec, false);      // same renderer, guides off
@@ -220,15 +330,14 @@ $('#download').addEventListener('click', function () {
   try {
     oc.toBlob(function (blob) {
       if (!blob) { status('This view blocked the download. Right-click the picture and choose Save image.'); return; }
-      var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove();
-      status('Saved as ' + name + '. If nothing downloaded, right-click the picture and choose Save image.');
+      saveBlob(blob, name);
     }, 'image/png');
   } catch (e) { status('This view blocked the download. Right-click the picture and choose Save image.'); }
 });
 $('#fontnote').textContent = BRAND.fontNote;
 words(); panel(); draw();
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
-window.__edit = { spec: function () { return spec; }, render: render };
+window.__edit = { spec: function () { return spec; }, set: function (o) { Object.assign(spec, o); words(); changed(); }, render: render, tooLong: function () { return tooLong; } };
 })();
 </script>
 </body>

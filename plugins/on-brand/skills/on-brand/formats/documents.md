@@ -48,3 +48,8 @@ Build as HTML with `@page` set to the size (see `templates/flyer.html`), then pr
 - Open the PDF and check the fonts embedded (look at the headline).
 - Check nothing sits closer than the margin to the edge, and no line ends with one stray word.
 - Set the PDF's title to the document name, so it doesn't show "Untitled" in a browser tab.
+
+## Word, Google Docs, Canva and Adobe
+
+- **Word:** use the tool's built-in Word skill where there is one, or `python-docx`. Set heading and body styles from the brand (font, size, color) instead of formatting each line, so their edits stay on-brand. Google Docs opens the same file.
+- **Canva or Adobe:** hand over a PDF. Canva and Adobe Express open it as an editable design when uploaded; Illustrator and InDesign open PDFs too.

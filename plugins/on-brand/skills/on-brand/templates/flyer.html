@@ -19,7 +19,7 @@
   }
   .eyebrow {
     font-size: 12pt; letter-spacing: var(--tracking-label); text-transform: uppercase;
-    color: var(--color-secondary);
+    color: var(--color-primary); /* small text stays in a color that passes contrast */
   }
   .headline {
     font-family: var(--font-display); font-weight: var(--weight-display);
@@ -27,7 +27,7 @@
     font-size: 72pt; margin-top: 0.3in; max-width: 12ch; text-wrap: balance;
   }
   .when {
-    margin-top: 0.4in; font-size: 22pt; color: var(--color-tertiary);
+    margin-top: 0.4in; font-size: 22pt; color: var(--color-tertiary); /* check the accent passes as text (DESIGN.md); if not, use the text color */
     font-family: var(--font-display); font-weight: var(--weight-display);
   }
   .body { margin-top: 0.3in; font-size: 12pt; max-width: 5in; }

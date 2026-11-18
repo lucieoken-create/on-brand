@@ -6,7 +6,7 @@ Starter rules. When writing a brand's system, fill in the brand-specific lines a
 
 Platforms change sizes and safe zones without much notice, and spec guides online often disagree. So this file records when its specs were last checked.
 
-**Specs last checked:** 2026-11-11 (on-brand starter set). **Checked against:** platform help centers where available, cross-checked with recent spec guides.
+**Specs last checked:** 2026-11-11 (on-brand starter set; Story safe zones revised 2026-11-17). **Checked against:** platform help centers where available, cross-checked with recent spec guides.
 
 Before making a piece:
 
@@ -22,7 +22,7 @@ Before making a piece:
 | Instagram feed, portrait | 1080 × 1350 (4:5) | The default. The app also accepts 3:4 (1080 × 1440), but scheduling tools usually stop at 4:5, so 4:5 works everywhere. |
 | Instagram feed, square | 1080 × 1080 | For mixing with older square posts. |
 | Instagram carousel | Same as feed | Every slide uses the first slide's shape. Keep one shape for the whole set. |
-| Instagram story or reel cover | 1080 × 1920 (9:16) | Keep words out of the top 250px and bottom 340px, where the app's buttons sit. |
+| Instagram story or reel cover | 1080 × 1920 (9:16) | Organic Stories: keep words out of the top and bottom 250px, where the profile bar and reply bar sit, and fill the middle rather than leaving it empty. Story ads need more room at the bottom for the button (about 340px); check Meta's current ad guidance before making one. Instagram doesn't publish organic safe zones, so these come from spec guides. |
 | LinkedIn post image | 1080 × 1350 or 1200 × 627 | Portrait takes more room in the feed. 1200 × 627 suits link previews and page posts. |
 | LinkedIn document (carousel) post | A PDF, 1080 × 1350 per page by convention | LinkedIn doesn't publish a page size. |
 | LinkedIn personal banner | 1584 × 396 | The profile photo covers the lower left on desktop; keep words to the right. |
