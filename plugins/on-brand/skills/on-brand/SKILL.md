@@ -16,7 +16,7 @@ A folder called `<brand>-design/` holding two files that matter most:
 - `DESIGN.md`: how the brand looks. Colors, type, spacing, shapes, and what it never does. Written in the open DESIGN.md format from Google Labs, so it also works in Claude Design, impeccable, Stitch and other tools.
 - `PRODUCT.md`: who it's for, the point of view, why each choice was made, and the copy rules. Named so impeccable can read it too.
 
-Plus format rules for the pieces they make most, the principles and tools it needs, a SKILL.md that makes the folder its own skill, a kit for Canva, Adobe and other design tools (colors, fonts, logos, a swatch file and setup steps), and a test piece showing the difference. The files belong to the person.
+Plus format rules for the pieces they make most, the principles and tools it needs, a SKILL.md that makes the folder its own skill, a one-page visual guide to the brand they can look at or send to a designer, a kit for Canva, Adobe and other design tools (colors, fonts, logos, a swatch file and setup steps), and a test piece showing the difference. The files belong to the person.
 
 **on-brand is used once per brand.** Its job is to produce the brand's own skill. After setup, that skill makes pieces, checks them and takes feedback by itself, in Claude, Codex or any tool that reads skills or `AGENTS.md`. Attaching DESIGN.md and PRODUCT.md to any chat still does most of the job.
 
@@ -26,7 +26,7 @@ At the start of `start`, before the first question, tell the person in a few pla
 
 - what they're getting: their own skill, a set of brand files any AI tool can use to make on-brand graphics
 - how: you'll look at what they share, ask up to ten questions one at a time (short answers are fine), write the files, make a test piece and fix what's off
-- about half an hour
+- about half an hour, or longer if they're starting from scratch (see "Starting from scratch" in `reference/decide.md`)
 - where it ends up: saved to their account as a skill (in claude.ai, under Customize > Skills), so it works in any chat or project. You'll walk them through saving it at the end.
 - the scope: this is about how the brand looks, plus the few writing rules that affect graphics (how many words go on an image). It isn't a full voice or content guide.
 
@@ -86,8 +86,10 @@ Platform sizes and safe zones change. The social format file carries the date it
 - **Use another brand skill only if asked.** If the person already has a skill or files for this brand, don't use them to fill in setup answers unless the person asks; the point of setup is to hear it from them.
 - **Confirm before writing.** Show a one-screen summary of decisions and wait for a yes or changes.
 - **Check contrast** on every text and background pair with `scripts/contrast.py` when you can run code (4.5:1 for body text, 3:1 for large headlines). Flag failures and suggest the nearest passing shade from their palette. Without code, estimate and say it's an estimate.
-- **Only use fonts they're allowed to use:** Google Fonts, or files they own. Say which is which. If their site uses a paid font they haven't licensed for other uses, suggest the closest Google Font and label it as a stand-in.
-- **Whose brand is it?** Their own or a client's with permission is fine. For anyone else's site, treat it as reference: describe the feel and write an original system. Never copy another brand's logo, artwork, or exact palette and type pairing. The same goes for mood photos and screenshots: other businesses' logos, signs or packaging in them are reference for a feel, never something to put in a piece.
+- **Only use fonts they're allowed to use:** Google Fonts, or files they own. Say which is which. If their site uses a paid font they haven't licensed for other uses, suggest the closest Google Font and label it as a stand-in. Fonts are always real files set as live text, never lettering drawn by an image model.
+- **Whose brand is it?** Their own or a client's with permission is fine. For anyone else's site, treat it as reference: describe the feel and write an original system. Never copy another brand's logo, artwork, or exact palette and type pairing. The same goes for mood photos and screenshots: other businesses' logos, signs or packaging in them are reference for a feel, never something to put in a piece. And before styling a piece that belongs to someone else (a group they write for, a client's event), ask whose look it should follow.
+- **Revise from the version they picked.** Once they've chosen a version, every change starts from that one. Change one thing at a time and keep the rest as it was, so they can see what each change did. Asking to see it on more formats isn't asking for a redesign: carry the chosen look across as it is.
+- **Label placeholders.** A borrowed, cropped or stand-in image or wordmark in a preview gets a small "placeholder" label, so nobody mistakes it for a finished asset.
 - **Check every piece against `reference/principles.md`** before showing it: one thing leads, the accent stays rare, alignment is deliberate, decoration has a job. The person's own system wins where they conflict.
 - **Don't let AI defaults creep in.** No emoji in headings, no gradient blobs, no rounded cards everywhere just because, no stock phrases ("unlock", "elevate", "seamless"), no new colors outside the system.
 - **Keep it short.** DESIGN.md under about 250 lines, PRODUCT.md under about 120. A non-designer should be able to read both in ten minutes.

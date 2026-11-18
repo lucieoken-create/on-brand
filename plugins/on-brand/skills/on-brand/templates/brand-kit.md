@@ -1,6 +1,6 @@
 # {{Brand}} brand kit
 
-Your brand's colors, fonts and logos, ready to add to Canva, Adobe or any other design tool. Made with on-brand on {{date}}. The full rules live in DESIGN.md; this sheet is the short version for setting up other tools.
+Your brand's colors, fonts and logos, ready to add to Canva, Adobe or any other design tool. Made with on-brand on {{date}}. The full rules live in DESIGN.md, and `brand-guide.html` shows the brand at a glance; this sheet is the short version for setting up other tools.
 
 ## Colors
 

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{Brand}} brand guide</title>
+<!-- One-page visual guide to the brand, made during setup (see "The visual guide" in reference/write.md).
+     Fill every slot in double curly braces from DESIGN.md and PRODUCT.md, repeat the marked blocks
+     once per item, and delete any section the brand doesn't use. Embed fonts (@font-face with
+     base64 woff2) and images (base64 data URIs) so the file works on its own when sent to someone.
+     It prints to a PDF: open it in a browser and print, or render it headless (reference/make.md). -->
+<style>
+  /* tokens.css goes here */
+
+  /* Fonts: @font-face rules with the embedded files from assets/fonts/ */
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--color-neutral); color: var(--color-primary);
+    font-family: var(--font-body); font-weight: var(--weight-body); line-height: var(--leading-body);
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .page { max-width: 960px; margin: 0 auto; padding: 64px 32px 80px; }
+  section { padding-top: 48px; margin-top: 48px; border-top: 1px solid currentColor; }
+  h1, h2, .display { font-family: var(--font-display); font-weight: var(--weight-display);
+    letter-spacing: var(--tracking-display); line-height: var(--leading-display); }
+  h1 { font-size: 64px; }
+  h2 { font-size: 32px; margin-bottom: 24px; }
+  .label { font-size: 12px; letter-spacing: var(--tracking-label); text-transform: uppercase; }
+  .lede { font-size: 20px; max-width: 40em; margin-top: 16px; }
+  .meta { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 8px 32px; }
+  .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+  .two { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+
+  /* Colors */
+  .swatch { border-radius: var(--radius-md); overflow: hidden; border: 1px solid currentColor; }
+  .swatch .chip { height: 120px; }
+  .swatch .info { padding: 12px 16px; font-size: 14px; background: var(--color-neutral); }
+  .swatch .name { font-weight: 600; font-size: 16px; }
+  .pairs { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; }
+  .pair { padding: 12px 16px; border-radius: var(--radius-sm); font-size: 14px; border: 1px solid currentColor; }
+  .pair b { font-family: var(--font-display); font-size: 24px; margin-right: 8px; }
+
+  /* Type */
+  .specimen { padding: 32px; border: 1px solid currentColor; border-radius: var(--radius-md); }
+  .specimen .s-head { font-size: 56px; }
+  .specimen .s-sub { font-family: var(--font-display); font-size: 28px; margin-top: 16px; }
+  .specimen .s-body { font-size: 18px; max-width: 34em; margin-top: 16px; }
+  .specimen .s-label { margin-top: 24px; }
+  .fontlist { margin-top: 16px; font-size: 14px; }
+  .fontlist li { list-style: none; margin-top: 4px; }
+
+  /* Shape and logo */
+  .demo { height: 120px; display: flex; align-items: center; justify-content: center;
+    background: var(--color-primary); color: var(--color-neutral); font-size: 14px; }
+  .logo-tile { height: 180px; display: flex; align-items: center; justify-content: center;
+    border-radius: var(--radius-md); border: 1px solid currentColor; }
+  .logo-tile img { max-width: 60%; max-height: 60%; }
+  .caption { font-size: 14px; margin-top: 8px; }
+
+  /* In use */
+  .use img { width: 100%; display: block; border: 1px solid currentColor; }
+
+  /* Never and still open */
+  ul.list { padding-left: 1.2em; }
+  ul.list li { margin-top: 8px; }
+  .placeholder-tag { display: inline-block; font-size: 11px; letter-spacing: var(--tracking-label);
+    text-transform: uppercase; border: 1px dashed currentColor; padding: 2px 8px; margin-left: 8px; }
+  footer { margin-top: 64px; font-size: 14px; }
+
+  @page { size: auto; margin: 12mm; }
+  @media print { section { break-inside: avoid; } .page { padding: 0; } }
+</style>
+</head>
+<body>
+<main class="page">
+
+  <header>
+    <p class="label">Brand guide</p>
+    <!-- Their logo or wordmark. If it's a stand-in (the name set in the headline font), keep the placeholder tag. -->
+    <h1>{{Brand}}</h1>
+    <p class="lede">{{Who it's for and what they should feel, in one or two sentences from PRODUCT.md}}</p>
+    <div class="meta">
+      <span><span class="label">Style</span> {{style name, e.g. Swiss with a warm edge}}</span>
+      <span><span class="label">Sounds</span> {{three voice words}}</span>
+      <span><span class="label">Updated</span> {{date}}</span>
+    </div>
+  </header>
+
+  <section>
+    <h2>Colors</h2>
+    <div class="grid">
+      <!-- Repeat once per color. Use the person's own color names. -->
+      <div class="swatch">
+        <div class="chip" style="background: {{#1D2B3A}}"></div>
+        <div class="info">
+          <div class="name">{{Navy}}</div>
+          <div>{{#1D2B3A}} · RGB {{29, 43, 58}}</div>
+          <div>{{its job, e.g. all text}} · {{share, e.g. about 20%}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="pairs">
+      <!-- Repeat once per passing text pair, set in those colors, with the ratio from scripts/contrast.py. -->
+      <div class="pair" style="background: {{#FAF7F2}}; color: {{#1D2B3A}}"><b>Aa</b>{{Navy on Cream}} · {{12.1}}:1</div>
+    </div>
+    <p class="caption">{{Colors that never carry text, e.g. the light accent is for fills only.}}</p>
+  </section>
+
+  <section>
+    <h2>Type</h2>
+    <!-- Set on real words from the practice piece, in the real fonts. -->
+    <div class="specimen">
+      <p class="display s-head">{{A real headline from the practice piece}}</p>
+      <p class="s-sub">{{A subhead}}</p>
+      <p class="s-body">{{A sentence or two of body text, as it would really appear.}}</p>
+      <p class="label s-label">{{A label, e.g. Saturday · 10 to 4}}</p>
+    </div>
+    <ul class="fontlist">
+      <li><b>Headlines:</b> {{family}} {{weight}} · {{source, e.g. Google Fonts}} · {{license, e.g. SIL Open Font License}}</li>
+      <li><b>Body:</b> {{family}} {{weight}} · {{source}} · {{license}}</li>
+      <li>{{Why they work together, in one line}}</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Shape and space</h2>
+    <div class="grid">
+      <div><div class="demo" style="border-radius: var(--radius-md)">{{Corners}}</div><p class="caption">{{e.g. slightly rounded, 6px}}</p></div>
+      <div><div class="demo" style="{{box-shadow from DESIGN.md, or none}}">{{Shadow}}</div><p class="caption">{{e.g. none, or a solid offset block}}</p></div>
+      <div><div class="demo">{{Room}}</div><p class="caption">{{e.g. lots of breathing room; one thing per piece}}</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Logo and mark</h2>
+    <div class="grid">
+      <!-- Repeat once per logo file, on the background it goes on. -->
+      <div>
+        <div class="logo-tile" style="background: {{#FAF7F2}}"><img src="{{data URI of assets/logo-navy.png}}" alt="{{Brand}} logo"></div>
+        <p class="caption">{{logo-navy.png, on cream}}</p>
+      </div>
+    </div>
+    <p class="caption">{{Logo rules in a line, e.g. once per piece, bottom right, never recolored.}}</p>
+  </section>
+
+  <section>
+    <h2>In use</h2>
+    <!-- The practice piece and the second format from setup, as images. -->
+    <div class="two use">
+      <figure><img src="{{data URI of examples/after.png}}" alt="{{what it is}}"><figcaption class="caption">{{e.g. Instagram post}}</figcaption></figure>
+      <figure><img src="{{data URI of the second format}}" alt="{{what it is}}"><figcaption class="caption">{{e.g. Story}}</figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>Never</h2>
+    <ul class="list">
+      <!-- Their refusals from DESIGN.md's Do's and Don'ts, in their words. -->
+      <li>{{a refusal}}</li>
+    </ul>
+  </section>
+
+  <section>
+    <!-- Leave this section out if nothing is open. -->
+    <h2>Still open</h2>
+    <ul class="list">
+      <li>{{e.g. A logo: the wordmark above is a stand-in<span class="placeholder-tag">placeholder</span>. A designer or a separate session can take this on.}}</li>
+    </ul>
+  </section>
+
+  <footer>
+    The full rules are in DESIGN.md and PRODUCT.md. Colors, fonts and logos for Canva and Adobe are in <code>kit/</code>.
+  </footer>
+
+</main>
+</body>
+</html>

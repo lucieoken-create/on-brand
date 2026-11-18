@@ -13,9 +13,13 @@ Ask this every time, even when the person has already given a website address. A
 >
 > Optional: one piece that feels off or out of date, so I know what to avoid. And if you keep logos, illustrations, patterns or fonts in a folder (Google Drive, Notion, Dropbox), point me to that folder and I'll use those files in what I make.
 >
-> Is this your own brand, or a client's?
+> Is this your own brand, or a client's? And what's one thing you actually want to make soon, like a post for an event, a flyer or a menu? I'll try choices out on it as we go.
 
 If it's neither, follow the "whose brand" rule in SKILL.md. If they only give a website, carry on: the interview will have more guesses to confirm.
+
+**The practice piece** they name is used all the way through: for the side-by-sides in the interview, the sample with the summary, and the test piece. If they can't think of one, suggest one from what they said they make, and move on. If the piece belongs to someone else's look (an article for a group they're part of, a client's event, a friend's launch), ask whose look it should follow before using it. Only their own pieces test their brand.
+
+If the person has almost nothing (no site, no pieces, no palette, maybe not even a clear idea yet), say that's fine and use "Starting from scratch" in `reference/decide.md`.
 
 ### If they haven't made much yet
 

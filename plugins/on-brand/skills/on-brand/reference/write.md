@@ -23,7 +23,8 @@ Name it `<brand-slug>-design/`, for example `low-tide-goods-design/`. Before wri
   scripts/
     contrast.py     copied from this skill: the contrast checker
     make_ase.py     copied from this skill: writes the Adobe swatch file
-  kit/              for Canva, Adobe and other tools (see below)
+  kit/              for people and other tools (see below)
+    brand-guide.html  from templates/brand-guide.html: the one-page visual guide (and brand-guide.pdf if rendered)
     brand-kit.md    from templates/brand-kit.md: colors, fonts, logos and setup steps
     brand-colors.ase  from scripts/make_ase.py: the palette as an Adobe swatch file
   assets/           logo and image files they provided, and any versions you made from them
@@ -45,9 +46,23 @@ If you make versions they didn't send (a white logo from a colored one, a mark c
 
 Put the brand's font files in `assets/fonts/` with their licenses, so pieces render the same anywhere, including offline and in the editor. Google Fonts are free to ship this way. If Google Fonts is blocked (common in sandboxes), the same fonts come from npm: `npm install @fontsource/<font-name>` gives `.woff2` files and the license under `node_modules/@fontsource/<font-name>/`. Copy only the weights the system uses. Paid fonts never go in the folder unless the person says their license allows it.
 
+### The visual guide
+
+Everyone gets `kit/brand-guide.html`, filled in from `templates/brand-guide.html`: the brand on one page, for the person to look at and to send to a designer, a printer or someone new. DESIGN.md is for tools; this is for people. It shows:
+
+- the name and logo (or stand-in wordmark, labeled) and who it's for
+- each color with its name, hex, job and share, and the passing text pairs set in those colors
+- the fonts set on real words from the practice piece, as headline, subhead, body and label, with family, weight, source and license
+- corners, shadows and room
+- each logo file on the background it goes on
+- the test piece and the second format, as images
+- the never-list, and anything still open
+
+Write it after the test piece, so "In use" has real pieces in it, and update it after the round of feedback. Embed the fonts and images so it works as a single file. Render it and look at it like any other piece. Where you can, also save it as `kit/brand-guide.pdf` (see Output in `reference/make.md`). If they're stopping with a guide instead of a skill (see "A guide can be the finish" in `reference/decide.md`), this is their main deliverable.
+
 ### The kit for other tools
 
-Everyone gets a `kit/` folder, so the brand travels to the tools they already use:
+Everyone gets the rest of `kit/` too, so the brand travels to the tools they already use:
 
 - **`kit/brand-kit.md`** from `templates/brand-kit.md`: each color with its hex, RGB and job, the passing text pairs, the fonts and where to get them, the logo files and which background each goes on, and steps for Canva and Adobe. Keep the plan limits in it: Canva's free Brand Kit holds only a few colors, and Adobe Express brand kits need Premium. Cut the Canva or Adobe section only if they said they never use that tool.
 - **`kit/brand-colors.ase`**: run `python3 scripts/make_ase.py kit/brand-colors.ase --design DESIGN.md`. Illustrator, Photoshop and InDesign load it from the Swatches panel. Name colors in DESIGN.md's comments the way the person names them (`# Navy: all text`), so the swatches carry their names.
@@ -73,7 +88,7 @@ If they'll use editable pieces (`Edit mode: always` or `ask`), fill in `template
 
 1. Run `python3 scripts/contrast.py` on every text and background pair in the tokens. Fix or flag failures.
 2. If a shell with Node is available, run `npx @google/design.md lint DESIGN.md` and fix errors. If Node isn't there, skip it silently. If the command is blocked (no network, or a permission setting stops the install), say so once in the handover and move on. A warning about the `omitted` list is expected: the linter currently flags any section listed there. Keep the list, since it tells other tools a section was left out on purpose.
-3. Search the files for anything left from the templates (double curly braces), for hex codes that aren't in the tokens, and for anything that points outside the folder (a Claude Project doc, a path on their computer).
+3. Search the files for anything left from the templates (double curly braces), for hex codes that aren't in the tokens, and for anything that points outside the folder (a Claude Project doc, a path on their computer). Every stand-in (a borrowed photo, a placeholder wordmark) is labeled as one.
 4. Read DESIGN.md and PRODUCT.md once as the person would. Cut anything a non-designer wouldn't understand.
 
 ## Delivering

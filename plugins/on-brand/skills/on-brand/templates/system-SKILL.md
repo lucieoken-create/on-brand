@@ -24,9 +24,11 @@ Never invent facts (prices, dates, addresses) for a piece. Ask.
 
 ## Before showing a piece
 
-Render it if you can and look at it at full size and at the size it'll be seen. Check it against DESIGN.md's Do's and Don'ts and `reference/principles.md`: one thing leads, alignment (shared edges, even gaps, nothing nearly lined up), the fixed type sizes and weights, whole-pixel values. The brand's own rules win where they disagree with a principle.
+Render it if you can and look at it at full size and at the size it'll be seen. Check it against DESIGN.md's Do's and Don'ts and `reference/principles.md`: one thing leads, alignment (shared edges, even gaps, nothing nearly lined up), the fixed type sizes and weights, whole-pixel values. The brand's own rules win where they disagree with a principle. Fonts are the real files set as live text. A stand-in image or wordmark gets a small "placeholder" label.
 
-After showing it, ask what's off. If they have a piece that already gets it right, ask to see it.
+Then open the file they'll actually get (the PNG, PDF, PowerPoint or Word file), not just the preview, and check the fonts held and the artwork sits right on its background. Say in one line which file you checked.
+
+After showing it, ask what's off. If they have a piece that already gets it right, ask to see it. Revise from the version they picked: one change at a time, the rest kept as it was. Seeing it on another format isn't a request to redesign it.
 
 ## How pieces are delivered
 
@@ -63,6 +65,6 @@ Start by saying what's set now, in plain words ("Right now headlines are in the 
 7. **Platform specs:** when a size changes, update the table in `formats/social.md` and its "Specs last checked" date.
 8. **A new kind of piece** they'll make again (a podcast cover, a business card) gets its own file in `formats/`.
 9. **Changes apply from now on.** Never say pieces made before the change were updated. Offer to redo one if they want it.
-10. **Keep the examples, the editor and the kit in step.** If a change affects what `examples/` shows (a new default mark, a new color), redo the example and its PNG, so it never shows an old rule. If it affects the editor (a pairing, a word limit, a mark), change `templates/edit-post.html` too. If a color, font or logo changes, update `kit/` (re-run `python3 scripts/make_ase.py kit/brand-colors.ase --design DESIGN.md` and the sheet) and tell them to update their Canva or Adobe brand kit.
+10. **Keep the examples, the editor and the kit in step.** If a change affects what `examples/` shows (a new default mark, a new color), redo the example and its PNG, so it never shows an old rule. If it affects the editor (a pairing, a word limit, a mark), change `templates/edit-post.html` too. If a color, font or logo changes, update `kit/` (re-run `python3 scripts/make_ase.py kit/brand-colors.ase --design DESIGN.md`, the sheet and the visual guide) and tell them to update their Canva or Adobe brand kit. When an open decision in the guide gets settled (a logo, a motif), move it out of "Still open".
 
 In claude.ai, if Claude offers to save the changes to the skill (a card in the chat), accept it. If it doesn't, download the updated folder as a zip and upload it again to replace the old version.

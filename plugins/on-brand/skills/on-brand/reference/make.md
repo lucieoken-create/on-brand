@@ -35,10 +35,12 @@ When a new visual rule comes up (a treatment, a size, a way to place art), make 
 
 Make the same piece twice so the difference is visible:
 
-- **before.html:** what Claude makes from a plain request with no system, for example "Make an Instagram post for our Small Business Saturday sale on Nov 29, 20% off everything." Build it honestly, the way a generic request would come out. Don't make it deliberately bad.
+- **before.html:** what Claude makes from a plain request with no system. Use the practice piece they named in `pull`; if there isn't one, something like "Make an Instagram post for our Small Business Saturday sale on Nov 29, 20% off everything." Build it honestly, the way a generic request would come out. Don't make it deliberately bad.
 - **after.html:** the same request, made with the system.
 
 Show both side by side and name two or three specific differences ("the accent only appears on the date, the headline is six words, no emoji"). Save both to `examples/` in their folder. If they'll use editable pieces, also hand the after piece over in the filled-in editor, so they try it once during setup.
+
+**Then one more format.** If they make more than one kind of piece, show the after piece's message as a second kind too (a Story for a post, a flyer for an event). This checks that the system carries, not just one layout. Carry the look across as it is. If it feels disconnected, check size, alignment and spacing before reopening the colors or fonts.
 
 ## Output
 
@@ -64,6 +66,8 @@ Hand the piece over the way the brand's SKILL.md `Delivery:` line says, unless t
 
   `--virtual-time-budget` gives web fonts time to load; `--allow-file-access-from-files` lets local images load when they're used as CSS masks. For a PDF, use `--print-to-pdf=after.pdf` instead of `--screenshot`. If nothing can render, say so and give them the HTML to open.
 - **claude.ai:** show the HTML as an artifact so they can see it, and offer it as a file. If you can render a PNG in the sandbox, do it and look at it before showing; the first render often catches overlaps and stray words. Tell them they can also open the HTML in a browser and print to PDF.
+
+**Check what they'll receive.** The preview isn't the deliverable. Before handing over, open the file they'll actually get (the PNG, the PDF, the PowerPoint, the zip) and check: the right fonts held, artwork sits cleanly on its real background with no stray edges, and it reads at the size it'll be seen. Say in one line which file you checked and how ("I opened the PNG at full size and at phone size"). If you couldn't open it, say so.
 
 ## Edit mode
 
@@ -96,7 +100,7 @@ At the end of `start`, this round is part of setup: pull, interview, write, the 
 
 ## The handover
 
-After that round, setup is done. Say so, and hand the system over as its own skill:
+After that round, setup is done. Say so, and hand the system over as its own skill. (If they'd rather stop with the files and the visual guide, to take them to a designer or to Canva, that's a good finish too: skip step 1 and give them the folder.)
 
 1. **Install it** where they work, after checking the name is still free:
    - **Claude Code:** copy the folder to `~/.claude/skills/<folder name>/` (all their projects) or the project's `.claude/skills/` (this project only). Ask which.
@@ -105,7 +109,8 @@ After that round, setup is done. Say so, and hand the system over as its own ski
    - **No code tools:** they already have DESIGN.md and PRODUCT.md as text; tell them to keep both together and attach them when making things.
 2. **Tell them, in a few lines,** what changes now:
    > Your brand system is set up and installed as its own skill, `<name>`. From here, you don't need on-brand: ask for what you want ("Make a LinkedIn post for our workshop on Dec 6") and your skill handles it. When something looks off, say so, and it writes the fix into your files so it holds next time. The files are yours, and they work in Claude, Codex and other tools that read them. Come back to on-brand to set up another brand or a client, or for a bigger rework.
-3. **Point them to the kit** if they use Canva, Adobe or another design tool: "Your colors, fonts and logos are in `kit/`, with steps for adding them to Canva and Adobe." Say the plan limits in a line (Canva's free Brand Kit only holds a few colors; Adobe Express brand kits need Premium). If they finish pieces there, remind them that a PDF or PowerPoint opens as an editable design when uploaded.
+3. **Show them the visual guide** (`kit/brand-guide.html`, and the PDF if you rendered one): one page with their brand at a glance, to keep or send to a designer, a printer or a new hire. In claude.ai, show it as an artifact.
+   **Point them to the kit** if they use Canva, Adobe or another design tool: "Your colors, fonts and logos are in `kit/`, with steps for adding them to Canva and Adobe." Say the plan limits in a line (Canva's free Brand Kit only holds a few colors; Adobe Express brand kits need Premium). If they finish pieces there, remind them that a PDF or PowerPoint opens as an editable design when uploaded.
 4. **Hand the brand to the Small Business pack's brand-style,** if they use it. That pack styles its own reports and pages from a short profile (Website, Brand colors, Logo) that its `brand-style` skill keeps in Cowork's memory, under a `## Business context` heading.
    - **In Cowork, with that heading in memory:** offer to fill those fields with the same brand, show exactly what you'll write, and change only those fields after a yes. Brand colors: the main color and the background, by name and hex. Logo: the logo's web address if it has one.
    - **Anywhere else:** give them one line to paste into a chat where the pack is installed: "Update my brand: <main color name> <hex> and <background name> <hex>, logo at <web address>."
