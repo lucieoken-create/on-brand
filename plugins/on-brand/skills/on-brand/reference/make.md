@@ -6,7 +6,7 @@ Read DESIGN.md, PRODUCT.md, `reference/principles.md` and the matching file in `
 
 **Something with no format file** (a business card, a Substack header, a podcast cover, a sticker): make it from DESIGN.md and PRODUCT.md, and look up the current size and safe zones for that platform or medium if you can search the web. If they'll make it again, offer to add a format file for it with `update`.
 
-Ask only what you need: what the piece is for, the words or facts it must include (date, price, link), and where it's going. Never invent facts like prices, dates or addresses. Leave a clearly marked gap and ask.
+Ask only what you need: what the piece is for, the words or facts it must include (date, price, link), and where it's going. Never invent facts like prices, dates, times or addresses. Leave a clearly marked gap and ask. Suggested details are fine in captions and copy (a reason, a name, a line about the place) as long as you list them after the piece and ask the person to confirm each one: "I added a reason for closing Tuesdays. Keep it only if it's true."
 
 ## Building it
 

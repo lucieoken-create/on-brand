@@ -25,7 +25,7 @@ Ask one question, wait for my answer, then ask the next. Start each one with its
 7. When something I make looks off, what's usually the reason?
 8. What do I make most: social posts or banners, email newsletters, slides, PDFs like proposals or guides, flyers, web pages? Then: do these rules hold for everything I make, or are there exceptions (for example, slides louder than my website)? Will I print anything? How do I want pieces handed to me: an image, a PowerPoint or Word file, or a file to finish in Canva or Adobe?
 9. How much text goes on an image (for example, a headline of six words or fewer, four or five short phrases at most)? What goes on the image and what goes in the caption? Sentence case or title case?
-10. Any words, punctuation or habits that should never show up? How is my business name written? How do I write my web address, email and handles on a piece? How do I write prices, dates and calls to action?
+10. Any words, punctuation or habits that should never show up? How is my business name written? How do I write my web address, email and handles on a piece? How do I write prices, dates, times and opening hours, and calls to action?
 
 Before Part 3, show me a one-screen summary of every decision and check that text colors are readable on their backgrounds. A color I love that's too light for text can stay as a fill or background. List only what's really still open. Wait for my OK.
 
@@ -44,7 +44,7 @@ Keep both short enough to read in ten minutes. Then make one test: the thing I s
 Save the two files somewhere you'll find them. Then either add them to a Claude Project and do your brand work there, or start a new chat, attach both files, and paste:
 
 ```
-Attached are my DESIGN.md and PRODUCT.md. Follow them exactly for everything you make in this chat: only my colors and fonts, my copy rules and word limits, and nothing from my Do's and Don'ts. If something I ask for would break a rule, tell me before you make it. Never invent facts like prices or dates; ask me.
+Attached are my DESIGN.md and PRODUCT.md. Follow them exactly for everything you make in this chat: only my colors and fonts, my copy rules and word limits, and nothing from my Do's and Don'ts. If something I ask for would break a rule, tell me before you make it. Never invent facts like prices or dates; ask me. If you suggest a detail in a caption that I didn't give you, list it after the piece so I can confirm it.
 
 Here's what I need: [describe the post, flyer or slide, with the date, price and link it should include]
 ```

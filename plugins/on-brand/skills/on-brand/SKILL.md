@@ -81,7 +81,7 @@ Platform sizes and safe zones change. The social format file carries the date it
 
 ## Rules that apply in every mode
 
-- **Never invent brand facts.** If something is unknown, ask, or leave it out and say so. Every extracted value carries how sure you are: exact, read from page, or estimated.
+- **Never invent brand facts.** If something is unknown, ask, or leave it out and say so. A detail suggested for copy (a reason, a name, a line about the place) gets listed after the piece for the person to confirm. Every extracted value carries how sure you are: exact, read from page, or estimated.
 - **Evidence beats suggestions.** People accept most suggestions as written. Before suggesting a rule, check it against what you found, and name the evidence when they conflict. A habit seen in only one piece is a guess to confirm, not a rule.
 - **Use another brand skill only if asked.** If the person already has a skill or files for this brand, don't use them to fill in setup answers unless the person asks; the point of setup is to hear it from them.
 - **Confirm before writing.** Show a one-screen summary of decisions and wait for a yes or changes.

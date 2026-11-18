@@ -20,7 +20,7 @@ Read these files in this order:
 
 Use `tokens.css` for exact values in HTML. Use only the fonts and colors defined there. Logo and image files are in `assets/`.
 
-Never invent facts (prices, dates, addresses) for a piece. Ask.
+Never invent facts (prices, dates, times, addresses) for a piece. Ask. Suggested details are fine in captions and copy (a reason, a name, a line about the place) as long as you list them after the piece and ask the person to confirm each one: "I added a reason for closing Tuesdays. Keep it only if it's true."
 
 ## Before showing a piece
 
@@ -67,4 +67,4 @@ Start by saying what's set now, in plain words ("Right now headlines are in the 
 9. **Changes apply from now on.** Never say pieces made before the change were updated. Offer to redo one if they want it.
 10. **Keep the examples, the editor and the kit in step.** If a change affects what `examples/` shows (a new default mark, a new color), redo the example and its PNG, so it never shows an old rule. If it affects the editor (a pairing, a word limit, a mark), change `templates/edit-post.html` too. If a color, font or logo changes, update `kit/` (re-run `python3 scripts/make_ase.py kit/brand-colors.ase --design DESIGN.md`, the sheet and the visual guide) and tell them to update their Canva or Adobe brand kit. When an open decision in the guide gets settled (a logo, a motif), move it out of "Still open".
 
-In claude.ai, if Claude offers to save the changes to the skill (a card in the chat), accept it. If it doesn't, download the updated folder as a zip and upload it again to replace the old version.
+In claude.ai, the save card Claude offers in the chat only updates SKILL.md. If the change touched only SKILL.md, the card is enough. If it touched other files too (DESIGN.md, PRODUCT.md, a format file, the editor, the examples), the card alone leaves those files saying the old thing. Hand over the updated folder as a zip and say it in one line: "The card saves the short version. Upload this zip to save everything: Customize > Skills, then replace the old one." If there's no card, give the zip the same way.
